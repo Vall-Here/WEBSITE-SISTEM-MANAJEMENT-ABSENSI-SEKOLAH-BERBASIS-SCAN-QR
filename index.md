@@ -41,19 +41,19 @@ Jelajahi kehebatan sistem EduConnect pada masing-masing modul berikut:
 
 Digitalisasi tak perlu mahal. Kami mendesain sistem EduConnect agar dapat diimplementasikan pada sekolah dengan skala apa pun.
 
-| Paket | Basic | Pro (Rekomendasi) | Enterprise |
-| :--- | :--- | :--- | :--- |
-| **Harga / Bulan** | **Rp 299.000** | **Rp 499.000** | **Custom** |
-| **Batas Siswa** | Maksimal 500 | Tanpa Batas (*Unlimited*) | Tanpa Batas (*Unlimited*) |
-| **Portal PWA** | Termasuk | Termasuk | Termasuk |
-| **Scanner QR** | Termasuk | Termasuk | Termasuk |
-| **Laporan Ekspor**| Excel Saja | PDF & Excel | Custom Format |
-| **Dukungan Prioritas**| Standar | Prioritas (24/7) | Prioritas Khusus + On-Site |
-| **Lisensi Source Code**| ❌ | ❌ | ✅ |
+| Paket | Siap Pakai | 
+| :--- | :--- | 
+| **Harga 1 time purchase** | **Rp 3.000.000** | 
+| **Keunggulan** | Bantuan Hosting |
+| **Biaya Awal Hosting**| Include | 
+| **Biaya Langganan Hosting**| Terpisah |
+| **Seluruh Fitur** | ✅  | 
+| **Pelatihan penggunaan**| 3 Bulan (meeting)| 
+| **Lisensi Source Code**| ❌ |
 
-*(Gambar: Ilustrasi tabel perbandingan fitur untuk menarik pelanggan)*
+
 
 <br>
 
 > **Siap untuk membawa sekolah Anda ke level digital selanjutnya?**  
-> [**Hubungi Tim Sales Kami Sekarang!**](#) 🚀
+> [**Hubungi ahmadnoval.muhyiddin@gmail.com!**](#) 

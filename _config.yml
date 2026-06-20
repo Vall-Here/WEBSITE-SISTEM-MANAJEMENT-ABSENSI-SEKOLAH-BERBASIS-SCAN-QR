@@ -1,0 +1,6 @@
+title: EduConnect
+description: Sistem Manajemen Absensi & Portal Sekolah Berbasis QR Code Terpadu
+theme: jekyll-theme-cayman
+url: "" # Ganti dengan URL Github Pages Anda
+plugins:
+  - jekyll-seo-tag

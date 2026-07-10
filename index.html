@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Digitalisasi Absensi Sekolah Cerdas</title>
+    <meta name="description" content="Sistem absensi berbasis QR Code dan Portal Orang Tua (PWA) untuk digitalisasi sekolah.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1; /* Indigo 500 */
+            --primary-hover: #4f46e5; /* Indigo 600 */
+            --secondary: #8b5cf6; /* Violet 500 */
+            --bg-color: #f8fafc; /* Slate 50 */
+            --text-main: #0f172a; /* Slate 900 */
+            --text-muted: #64748b; /* Slate 500 */
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 { line-height: 1.25; font-weight: 700; color: var(--text-main); }
+
+        h2 {
+            font-size: 2.75rem;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px; left: 50%;
+            transform: translateX(-50%);
+            width: 70px; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        p { color: var(--text-muted); }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.25rem 5%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            position: fixed; width: 100%; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem; font-weight: 800; color: var(--primary-hover);
+            text-decoration: none; display: flex; align-items: center; gap: 0.75rem;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white; width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 10px; font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(99, 102, 241, 0.3);
+        }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 600; transition: color 0.3s; font-size: 1rem; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .hero {
+            padding: 11rem 5% 8rem; text-align: center;
+            background: radial-gradient(circle at top right, #eef2ff 0%, #faf5ff 100%);
+            position: relative; overflow: hidden;
+        }
+        
+        .badge {
+            display: inline-block; background: #e0e7ff; color: var(--primary-hover);
+            padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.875rem; font-weight: 700;
+            margin-bottom: 1.5rem; border: 1px solid #c7d2fe;
+        }
+
+        .hero h1 {
+            font-size: 4.2rem; margin-bottom: 1.5rem;
+            background: -webkit-linear-gradient(45deg, #1e1b4b, var(--primary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: -0.03em;
+        }
+
+        .hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto 3rem; color: #475569; }
+
+        .btn {
+            display: inline-block; padding: 1rem 2.5rem; background: var(--primary);
+            color: white; text-decoration: none; border-radius: 999px; font-weight: 600;
+            font-size: 1.1rem; transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+            border: 2px solid transparent; cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover); transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.8); color: var(--primary-hover);
+            border: 2px solid var(--primary-hover); box-shadow: none; margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-hover); color: white;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.2);
+        }
+
+        .hero-image-wrapper {
+            margin-top: 6rem; position: relative; z-index: 1; padding: 1rem;
+            background: white; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-color); display: inline-block; max-width: 95%;
+        }
+
+        .hero-image { width: 100%; height: auto; border-radius: 16px; display: block; border: 1px solid #f1f5f9; min-height: 400px; background: #e2e8f0; }
+
+        section { padding: 8rem 5%; }
+
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 5rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg); padding: 2.5rem; border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid var(--border-color);
+            transition: all 0.4s ease; position: relative; overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); border-color: #c7d2fe;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
+            width: 72px; height: 72px; display: flex; align-items: center; justify-content: center;
+            border-radius: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .feature-card h3 { font-size: 1.4rem; margin-bottom: 1rem; color: #0f172a; }
+        .feature-card p { margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .feature-card ul { list-style: none; margin-top: 1.5rem; }
+        .feature-card ul li { margin-bottom: 0.75rem; display: flex; align-items: flex-start; color: var(--text-muted); font-size: 0.95rem; }
+        .feature-card ul li::before {
+            content: '✓'; color: white; background: var(--secondary); margin-right: 0.75rem;
+            font-weight: bold; border-radius: 50%; width: 18px; height: 18px;
+            display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; margin-top: 4px;
+        }
+
+        .gallery-container { column-count: 3; column-gap: 1.5rem; margin-top: 4rem; }
+        @media (max-width: 1024px) { .gallery-container { column-count: 2; } }
+        @media (max-width: 640px) { .gallery-container { column-count: 1; } }
+
+        .gallery-item {
+            break-inside: avoid; margin-bottom: 1.5rem; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); cursor: pointer; position: relative;
+            background: white; padding: 0.5rem; border: 1px solid var(--border-color); transition: all 0.4s ease;
+        }
+        
+        .gallery-item img { width: 100%; display: block; border-radius: 12px; transition: transform 0.5s ease; min-height: 150px; background: #e2e8f0; }
+        .gallery-item:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.2); }
+        .gallery-item:hover img { transform: scale(1.03); }
+        .gallery-item::after {
+            content: '🔍 Perbesar'; position: absolute; top: 0.5rem; left: 0.5rem; right: 0.5rem; bottom: 0.5rem;
+            background: rgba(15, 23, 42, 0.6); color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1.25rem; opacity: 0; transition: opacity 0.3s ease; border-radius: 12px; backdrop-filter: blur(3px);
+        }
+        .gallery-item:hover::after { opacity: 1; }
+        .gallery-caption { text-align: center; padding: 0.75rem 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
+
+        .lightbox {
+            display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); justify-content: center; align-items: center;
+            padding: 2rem; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .lightbox.active { display: flex; opacity: 1; }
+        .lightbox img { max-width: 90%; max-height: 90vh; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.3s ease; }
+        .lightbox.active img { transform: scale(1); }
+        .lightbox-close { position: absolute; top: 2rem; right: 3rem; color: white; font-size: 3rem; cursor: pointer; line-height: 1; transition: color 0.3s; }
+        .lightbox-close:hover { color: #ef4444; }
+
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 5rem; align-items: stretch; justify-content: center;}
+        
+        .pricing-card {
+            background: var(--card-bg); border-radius: 24px; padding: 3.5rem 2.5rem; text-align: left;
+            border: 1px solid var(--border-color); position: relative; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); transition: transform 0.3s;
+            display: flex; flex-direction: column; max-width: 500px; margin: 0 auto; width: 100%;
+        }
+        
+        .pricing-card:hover { transform: translateY(-5px); }
+        .pricing-card.popular {
+            border: 2px solid var(--primary); box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.15);
+            transform: scale(1.05); background: linear-gradient(180deg, #ffffff 0%, #f5f3ff 100%);
+        }
+        .pricing-card.popular:hover { transform: scale(1.05) translateY(-5px); }
+        
+        .pricing-badge {
+            position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background: var(--primary);
+            color: white; padding: 6px 24px; border-radius: 999px; font-size: 0.9rem; font-weight: 700; box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3); white-space: nowrap;
+        }
+        .pricing-title { font-size: 1.5rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .popular .pricing-title { color: var(--primary-hover); }
+        .price { font-size: 3rem; font-weight: 800; color: var(--text-main); margin: 1rem 0 0.5rem; letter-spacing: -0.05em; }
+        .price-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2.5rem; line-height: 1.4; }
+        .pricing-features { list-style: none; margin-bottom: 3rem; flex-grow: 1; }
+        .pricing-features li { margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: var(--text-main); }
+        .pricing-features li span.check { color: var(--secondary); font-weight: bold; }
+        .btn-full { display: block; width: 100%; text-align: center; margin-top: auto; }
+
+        footer { background: #0f172a; color: #94a3b8; padding: 4rem 5% 2rem; }
+        .footer-content {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;
+            border-bottom: 1px solid #1e293b; padding-bottom: 2rem; margin-bottom: 2rem;
+        }
+        .footer-logo { font-size: 1.5rem; font-weight: 800; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; } .nav-links { display: none; }
+            .pricing-card.popular { transform: none; } .pricing-card.popular:hover { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">
+            <div class="logo-icon">E</div>
+            EduConnect
+        </a>
+        <div class="nav-links">
+            <a href="#features">Mengapa EduConnect</a>
+            <a href="#modules">Modul Sistem</a>
+            <a href="#gallery">Galeri</a>
+            <a href="#pricing">Harga</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="badge">🎓 Smart School Attendance Ecosystem</span>
+            <h1>Digitalisasi Absensi Sekolah Cerdas</h1>
+            <p>Tinggalkan cara lama presensi manual yang memakan waktu dan beralihlah ke ekosistem absensi berbasis QR Code super cepat, terintegrasi langsung dengan Portal Orang Tua (PWA).</p>
+            <div>
+                <a href="#pricing" class="btn">Lihat Paket</a>
+                <a href="#modules" class="btn btn-outline">Eksplorasi Modul</a>
+            </div>
+        </div>
+        <div class="hero-image-wrapper">
+            <img src="assets/images/hero-dashboard.png" alt="EduConnect Dashboard Utama" class="hero-image" loading="lazy" onerror="this.src='https://placehold.co/1200x600/e2e8f0/94a3b8?text=Image+Not+Found+(hero-dashboard.png)'">
+        </div>
+    </header>
+
+    <section id="features">
+        <h2>Mengapa Memilih EduConnect?</h2>
+        <p style="text-align: center; font-size: 1.15rem; max-width: 700px; margin: 0 auto;">Kami mendesain sistem agar dapat diimplementasikan secara instan pada sekolah skala apapun.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Cepat & Akurat</h3>
+                <p>Cukup scan kode QR di depan webcam sekolah, siswa langsung tercatat hadir secara real-time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👁️</div>
+                <h3>Transparan</h3>
+                <p>Orang tua dapat memantau kedatangan dan kepulangan anak detik itu juga dari ponsel mereka.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>Serba Otomatis</h3>
+                <p>Lupakan mengabsen manual. Sistem otomatis menyematkan status "Alpha" pada akhir hari jika siswa tidak datang.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Ekspor Fleksibel</h3>
+                <p>Sekali klik mencetak rekapitulasi data absensi ke file PDF maupun Excel untuk bahan rapat evaluasi.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="modules" style="background: white;">
+        <h2>Eksplorasi Fitur Kami</h2>
+        <p style="text-align: center; font-size: 1.15rem; max-width: 700px; margin: 0 auto;">Jelajahi kehebatan sistem EduConnect pada masing-masing modul berikut:</p>
+        
+        <div class="features-grid" style="margin-top: 3rem;">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #dcfce7, #bbf7d0);">📷</div>
+                <h3>Absensi QR & Scanner</h3>
+                <p>Infrastruktur presensi super cepat, 100% digital tanpa kertas. Mendukung pemindaian massal secara cepat untuk menghindari antrean.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #fef08a, #fde047);">📱</div>
+                <h3>Portal PWA Orang Tua</h3>
+                <p>Pantau anak cukup dengan koneksi internet dari smartphone. Tanpa perlu repot install aplikasi dari Play Store.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #fecaca, #f87171);">🤖</div>
+                <h3>Auto-Alpha & Hari Libur</h3>
+                <p>Sistem cerdas (Cron Job) yang mengatur presensi tanpa perlu operator tambahan. Tahu persis kapan libur nasional aktif.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #e0f2fe, #7dd3fc);">📂</div>
+                <h3>Pengarsipan Kelas</h3>
+                <p>Simpan riwayat absensi jutaan siswa dari tahun ke tahun tanpa mengotori database utama. Export langsung ke Excel.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Galeri Ekosistem EduConnect</h2>
+        <p style="text-align: center; margin-bottom: 2rem; font-size: 1.15rem;">Klik gambar untuk memperbesar resolusi layar.</p>
+        
+        <div class="gallery-container">
+            <div class="gallery-item" onclick="openLightbox('assets/images/hero-dashboard.png')">
+                <img src="assets/images/hero-dashboard.png" alt="Dashboard Interaktif" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=hero-dashboard.png'">
+                <div class="gallery-caption">Dashboard Utama EduConnect</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('assets/images/qr-scan.png')">
+                <img src="assets/images/qr-scan.png" alt="QR Scan" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=qr-scan.png'">
+                <div class="gallery-caption">Scanner QR Code Otomatis</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('assets/images/parent-portal.png')">
+                <img src="assets/images/parent-portal.png" alt="Portal PWA" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=parent-portal.png'">
+                <div class="gallery-caption">Akses Portal PWA Orang Tua</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('assets/images/auto-alpha-cron.png')">
+                <img src="assets/images/auto-alpha-cron.png" alt="Auto Alpha" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=auto-alpha-cron.png'">
+                <div class="gallery-caption">Pengaturan Hari Libur & Auto-Alpha</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('assets/images/class-archive.png')">
+                <img src="assets/images/class-archive.png" alt="Arsip Kelas" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=class-archive.png'">
+                <div class="gallery-caption">Digital Archiving & Pembersihan Data</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('assets/images/report-dashboard.png')">
+                <img src="assets/images/report-dashboard.png" alt="Report Dashboard" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=report-dashboard.png'">
+                <div class="gallery-caption">Generator Laporan Akademik</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" style="background: white;">
+        <h2>Investasi Ekosistem Digital</h2>
+        <p style="text-align: center; font-size: 1.15rem; max-width: 700px; margin: 0 auto;">Digitalisasi tak perlu mahal. Transparan, tanpa biaya tersembunyi.</p>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card popular">
+                <div class="pricing-badge">Paket Siap Pakai</div>
+                <h3 class="pricing-title">One Time Purchase</h3>
+                <div class="price">Rp 3.000.000</div>
+                <p class="price-desc" style="font-weight: 600; color: var(--primary-hover);">Keunggulan: Bantuan Hosting & Domain Awal Siap Pakai</p>
+                <p class="price-desc" style="font-size: 0.85rem; margin-top: -1.5rem;">Biaya Awal Hosting: <strong>Include</strong> | Langganan Selanjutnya: <strong>Terpisah</strong></p>
+                
+                <ul class="pricing-features">
+                    <li><span class="check">✔️</span> Seluruh Fitur EduConnect Aktif</li>
+                    <li><span class="check">✔️</span> Ekosistem Absensi QR Code</li>
+                    <li><span class="check">✔️</span> Portal Orang Tua PWA</li>
+                    <li><span class="check">✔️</span> Pelatihan Penggunaan (3 Bulan via Meeting)</li>
+                    <li><span class="check" style="color: #ef4444;">❌</span> Lisensi Source Code</li>
+                </ul>
+                <a href="mailto:ahmadnoval.muhyiddin@gmail.com" class="btn btn-full">Pesan & Implementasikan Sekarang</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="footer-logo">
+                <div class="logo-icon" style="width: 30px; height: 30px; font-size: 1rem;">E</div>
+                EduConnect
+            </a>
+            <div style="display: flex; gap: 2rem;">
+                <a href="#features" style="color: #94a3b8; text-decoration: none;">Fitur</a>
+                <a href="#gallery" style="color: #94a3b8; text-decoration: none;">Galeri</a>
+                <a href="#pricing" style="color: #94a3b8; text-decoration: none;">Harga</a>
+            </div>
+        </div>
+        <p style="text-align: center;">&copy; 2026 EduConnect. Solusi cerdas absensi sekolah Anda.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close" title="Tutup">&times;</span>
+        <img id="lightbox-img" src="" alt="Preview">
+    </div>
+
+    <script>
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgSrc;
+            
+            // Fallback for missing images in lightbox too
+            lightboxImg.onerror = function() {
+                this.src = 'https://placehold.co/1200x800/e2e8f0/94a3b8?text=' + imgSrc.split('/').pop();
+            };
+            
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            setTimeout(() => {
+                const lightboxImg = document.getElementById('lightbox-img');
+                if(!lightbox.classList.contains('active')) {
+                    lightboxImg.src = "";
+                }
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") closeLightbox();
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 90,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

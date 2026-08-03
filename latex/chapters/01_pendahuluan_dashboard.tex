@@ -1,0 +1,41 @@
+\chapter{Pendahuluan \& Dashboard}
+
+Modul \textit{Dashboard} merupakan pusat kendali analitik dari aplikasi EduConnect. Modul ini menyajikan ringkasan data kehadiran harian secara \textit{real-time}, grafik tren mingguan, serta daftar siswa dengan persentase kehadiran terendah guna memudahkan manajemen dalam mengambil keputusan strategis.
+
+\section{Konsep Dasar \& Matriks Peran}
+\begin{itemize}
+    \item \textbf{Super Admin \& Admin}: Memiliki akses penuh ke semua metrik visualisasi dasbor sekolah.
+    \item \textbf{Wali Kelas (\textit{Teacher})}: Hanya dapat melihat metrik kehadiran yang spesifik untuk kelas yang dikelolanya.
+\end{itemize}
+
+\section{Skenario Dunia Nyata \& Alur Kerja}
+Di pagi hari, Kepala Sekolah ingin mengetahui tingkat kehadiran siswa secara keseluruhan. Fase 1: Kepala Sekolah (melalui akun Admin) membuka menu \textit{Dashboard}. Fase 2: Beliau melihat kartu metrik utama yang menunjukkan bahwa 95\% siswa sudah \textit{Hadir}, sementara 5\% tercatat sebagai \textit{Alpha}. Fase 3: Kepala Sekolah menggulir ke bawah untuk memantau aktivitas pemindaian QR secara langsung (\textit{LIVE}) saat siswa melewati gerbang. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{placeholder_dashboard_overview.png}
+    \caption{Tampilan ringkasan metrik kehadiran dan aktivitas pemindaian pada Dashboard.}
+    \label{figure:1.1}
+\end{figure}
+
+\section{Panduan Penggunaan (Step-by-Step)}
+
+\subsection{Memantau Tren Kehadiran Mingguan}
+\begin{enumerate}
+    \item Buka menu navigasi utama dan klik \textbf{Dashboard}.
+    \item Pada halaman utama, perhatikan grafik bertajuk \textbf{Tren Kehadiran 7 Hari}.
+    \item Grafik ini menggunakan jenis \textit{Stacked Bar} (diagram batang bertumpuk). 
+    \item Anda dapat mengarahkan kursor (\textit{hover}) ke atas balok grafik berwarna \textbf{hijau} (Hadir), \textbf{kuning} (Terlambat), \textbf{biru} (Izin), atau \textbf{merah} (Alpha) untuk melihat angka pasti dari total siswa pada tanggal tersebut.
+\end{enumerate}
+
+\subsection{Memantau Aktivitas Scan Secara Langsung (Live)}
+\begin{enumerate}
+    \item Pada halaman \textbf{Dashboard}, gulir ke bagian paling bawah ke tabel \textbf{Aktivitas Scan Terbaru}.
+    \item Perhatikan lencana indikator berkedip warna merah yang bertuliskan \textbf{LIVE}.
+    \item Tabel ini akan memuat ulang data secara otomatis (tanpa perlu *refresh* halaman) menggunakan teknologi WebSockets setiap kali ada siswa yang menempelkan kartu QR mereka di gerbang sekolah.
+\end{enumerate}
+
+\section{Penanganan Masalah (Edge Cases)}
+\begin{itemize}
+    \item \textbf{Data Live Tidak Berubah}: Jika tabel \textbf{Aktivitas Scan Terbaru} berhenti berkedip atau tidak *update* otomatis, hal ini kemungkinan disebabkan oleh koneksi \textit{WebSocket} (Reverb) yang terputus. Pastikan koneksi internet stabil. Sistem dirancang untuk melakukan \textit{Auto refresh} setiap 15 detik jika \textit{WebSocket} gagal terhubung.
+\end{itemize}

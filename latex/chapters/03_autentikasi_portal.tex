@@ -1,0 +1,54 @@
+\chapter{Modul Autentikasi \& Portal Orang Tua}
+
+Modul \textit{Parent Portal} adalah fitur ramah pengguna (*user-facing*) yang memfasilitasi interaksi antara sekolah dan orang tua murid. Melalui portal ini, orang tua dapat melakukan swa-pantau (*self-monitoring*) atas kehadiran anak mereka secara mandiri, mengurangi beban administratif sekolah.
+
+\section{Konsep Dasar \& Matriks Peran}
+\begin{itemize}
+    \item \textbf{Orang Tua / Siswa}: Hanya dapat mengakses halaman depan aplikasi (\textit{Front-end}). Mereka diberikan sesi baca-saja (*read-only*) untuk laporan kehadiran, namun diberikan wewenang untuk mengisi formulir permohonan izin/sakit.
+\end{itemize}
+
+\section{Skenario Dunia Nyata \& Alur Kerja}
+Hari ini hujan lebat, siswa Budi tidak bisa berangkat ke sekolah karena demam. Fase 1: Ayah Budi membuka website absensi sekolah dari \textit{smartphone}. Beliau memasukkan NIS Budi dan Tanggal Lahirnya. Fase 2: Portal terbuka dan menampilkan statistik bahwa Budi bulan ini sudah hadir 90\%. Fase 3: Sang Ayah mengeklik tombol 'Pengajuan Izin', memilih status 'Sakit', mengunggah foto termometer, lalu menekan Simpan. Data langsung terkirim ke \textit{Dashboard} Admin.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{placeholder_portal_login.png}
+    \caption{Antarmuka Halaman Login Portal Orang Tua.}
+    \label{figure:3.1}
+\end{figure}
+
+\section{Panduan Penggunaan (Step-by-Step)}
+
+\subsection{Proses Login Portal}
+\begin{enumerate}
+    \item Buka peramban (\textit{browser}) dan akses tautan utama aplikasi EduConnect.
+    \item Anda akan dihadapkan pada dua formulir isian utama.
+    \item Masukkan Nomor Induk Siswa anak Anda pada isian teks \textbf{NIS}.
+    \item Masukkan atau pilih tanggal lahir anak Anda pada kalender *dropdown* \textbf{Tanggal Lahir}.
+    \item Klik tombol \textbf{Masuk}. Apabila kombinasi NIS dan Tanggal Lahir cocok, sistem akan membuat sesi (\textit{Session}) baru dan mengarahkan Anda ke Halaman Dasbor Siswa.
+\end{enumerate}
+
+\subsection{Navigasi Dasbor Siswa}
+\begin{enumerate}
+    \item Setelah berhasil masuk, Anda akan melihat kartu identitas virtual siswa, mencakup Pas Foto, Nama Lengkap, dan Kelas.
+    \item Gulir layar ke bawah untuk meninjau bagian \textbf{Riwayat Absensi Terbaru}.
+    \item Area ini menampilkan tabel histori waktu \textit{Check-in}, \textit{Check-out}, serta \textit{Status} (Hadir/Alpha/Izin) khusus untuk 7 hari terakhir.
+\end{enumerate}
+
+\subsection{Mengirim Permohonan Surat Izin}
+\begin{enumerate}
+    \item Pada area Dasbor, temukan dan klik tombol \textbf{Buat Pengajuan Izin Baru} yang mencolok.
+    \item Anda akan dibawa ke form khusus surat izin.
+    \item Tentukan jenis izin dengan mengeklik \textit{dropdown} \textbf{Pilih Jenis} (\textit{Izin} atau \textit{Sakit}).
+    \item Pilih tanggal mulai tidak hadir pada input \textbf{Tanggal Dari}.
+    \item Pilih tanggal perkiraan selesai pada input \textbf{Tanggal Sampai}.
+    \item Jabarkan deskripsi sakit atau alasan izin secara lengkap di dalam kotak teks \textbf{Alasan izin/sakit}.
+    \item Apabila memiliki surat rujukan dari dokter, klik \textbf{Pilih File} pada isian \textbf{Lampiran} dan pilih foto dari galeri Anda.
+    \item Klik tombol utama \textbf{Kirim Pengajuan} di bagian bawah formulir untuk menyerahkan dokumen ke sekolah.
+\end{enumerate}
+
+\section{Penanganan Masalah (Edge Cases)}
+\begin{itemize}
+    \item \textbf{Pesan Error "Tanggal lahir tidak sesuai"}: Pastikan format yang digunakan saat mendaftarkan siswa di \textit{Master Data} benar (biasanya YYYY-MM-DD). Segera hubungi Tata Usaha jika data tanggal lahir yang di-*input* oleh sekolah keliru.
+    \item \textbf{Pesan Error "Terlalu banyak percobaan. Silakan coba lagi dalam 1 menit"}: Ini adalah proteksi anti peretasan (\textit{Rate Limiting}). Jika orang tua salah memasukkan NIS/Tanggal Lahir lebih dari 5 kali beruntun, sistem akan memblokir alamat IP tersebut selama 60 detik. Anda harus menunggu hitungan mundur selesai.
+\end{itemize}

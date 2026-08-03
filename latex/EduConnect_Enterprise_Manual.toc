@@ -1,0 +1,53 @@
+\babel@toc {indonesian}{}\relax 
+\contentsline {chapter}{\numberline {1}Pendahuluan \& Dashboard}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Konsep Dasar \& Matriks Peran}{5}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Skenario Dunia Nyata \& Alur Kerja}{5}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Panduan Penggunaan (Step-by-Step)}{6}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Memantau Tren Kehadiran Mingguan}{6}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Memantau Aktivitas Scan Secara Langsung (Live)}{6}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Penanganan Masalah (Edge Cases)}{6}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Modul Master Data (Siswa, Kelas, Tahun Ajaran)}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Konsep Dasar \& Matriks Peran}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Skenario Dunia Nyata \& Alur Kerja}{7}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Panduan Penggunaan (Step-by-Step)}{8}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Menambah Data Kelas Baru}{8}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Mengimpor Data Siswa Secara Massal (Excel)}{8}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Mengelola Status Aktif Siswa (Toggle)}{8}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Penanganan Masalah (Edge Cases)}{9}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Modul Autentikasi \& Portal Orang Tua}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Konsep Dasar \& Matriks Peran}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Skenario Dunia Nyata \& Alur Kerja}{11}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Panduan Penggunaan (Step-by-Step)}{12}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Proses Login Portal}{12}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Navigasi Dasbor Siswa}{12}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Mengirim Permohonan Surat Izin}{12}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Penanganan Masalah (Edge Cases)}{13}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Modul Pemindaian \& Operasional Absensi}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Konsep Dasar \& Matriks Peran}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Skenario Dunia Nyata \& Alur Kerja}{15}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Panduan Penggunaan (Step-by-Step)}{16}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Menjalankan Pemindai QR (Camera Scanner)}{16}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Melakukan Absensi Darurat (Manual Attendance)}{16}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Penanganan Masalah (Edge Cases)}{17}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Modul Persetujuan Izin (Leave Requests)}{19}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Konsep Dasar \& Matriks Peran}{19}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Skenario Dunia Nyata \& Alur Kerja}{19}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Panduan Penggunaan (Step-by-Step)}{20}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Melakukan Evaluasi Lampiran Izin}{20}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Menyetujui Permohonan (Approve)}{20}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Menolak Permohonan (Reject)}{20}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}Penanganan Masalah (Edge Cases)}{21}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Modul Laporan \& Rekapitulasi}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Konsep Dasar \& Matriks Peran}{23}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Skenario Dunia Nyata \& Alur Kerja}{23}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Panduan Penggunaan (Step-by-Step)}{24}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Menarik Rekapitulasi Laporan Bulanan (Excel)}{24}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Meninjau Rekam Jejak Individu (Student Report)}{24}{subsection.6.3.2}%
+\contentsline {section}{\numberline {6.4}Penanganan Masalah (Edge Cases)}{24}{section.6.4}%
+\contentsline {chapter}{\numberline {7}Modul Pemeliharaan \& Arsip (Maintenance \& Archive)}{27}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Konsep Dasar \& Matriks Peran}{27}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Skenario Dunia Nyata \& Alur Kerja}{27}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Panduan Penggunaan (Step-by-Step)}{28}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Melaksanakan Prosedur Arsip Kelas (Archive Protocol)}{28}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Mengambil Kembali Arsip yang Terkompresi (Download Artifact)}{28}{subsection.7.3.2}%
+\contentsline {section}{\numberline {7.4}Penanganan Masalah (Edge Cases)}{29}{section.7.4}%

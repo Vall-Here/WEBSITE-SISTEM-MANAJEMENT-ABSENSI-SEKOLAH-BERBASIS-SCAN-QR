@@ -1,0 +1,45 @@
+\chapter{Modul Pemeliharaan \& Arsip (Maintenance \& Archive)}
+
+Lompatan tahun ajaran selalu membawa masalah klasik: penumpukan sisa rekam jejak digital yang memberatkan sistem. EduConnect mengatasi ini melalui Modul Pemeliharaan dan Arsip yang didesain untuk mereset ruang kerja secara aman, membersihkan *cache* aplikasi, serta memproteksi data lawas ke dalam balutan arsip terkompresi.
+
+\section{Konsep Dasar \& Matriks Peran}
+\begin{itemize}
+    \item \textbf{Super Admin}: Satusatunya peran berdaulat yang menduduki puncak takhta wewenang (*god-mode*). Hanya Super Admin yang berhak memencet tombol eksekusi \textit{Archive Data}. Guru, bahkan level Admin sekalipun tidak diperkenankan bermain di area berbahaya ini guna menghambat insiden salah ketik (\textit{fat-finger}) yang menghapus data secara permanen.
+\end{itemize}
+
+\section{Skenario Dunia Nyata \& Alur Kerja}
+Penghujung bulan Juni 2026, tahun ajaran usai. Siswa kelas 12 telah diluluskan secara seremonial. Fase 1: Super Admin IT sekolah mengakses panel rahasia "Arsip Kelas". Fase 2: Beliau memilih opsi target "Kelas 12 MIPA 1", menandai kotak persetujuan penghapusan memori persisten, dan mengeksekusi "Arsipkan \& Hapus". Fase 3: Di balik layar (secara asinkron), aplikasi mengekstrak riwayat 12 MIPA 1, menyatukannya menjadi \texttt{12-mipa-1\_2026.zip}, memasukkannya ke lumbung \textit{Storage File System}, lalu menebas seluruh data absen dan relasi siswa bersangkutan di *database* tabel utama sehingga kapasitas sistem menjadi lega kembali untuk menyambut Tahun Ajaran 2027.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{placeholder_archive_danger_zone.png}
+    \caption{Zona Bahaya (Danger Zone) pada halaman Arsip Kelas yang mewajibkan konfirmasi ganda (Double-opt-in).}
+    \label{figure:7.1}
+\end{figure}
+
+\section{Panduan Penggunaan (Step-by-Step)}
+
+\subsection{Melaksanakan Prosedur Arsip Kelas (Archive Protocol)}
+\begin{enumerate}
+    \item Pastikan rapor semester/tahunan telah selesai dibagikan, karena prosedur ini akan \textbf{MENGHAPUS DATA UTAMA}.
+    \item Pada panel menu, akses wilayah \textbf{Maintenance} lalu klik opsi sekunder \textbf{Arsip Kelas}.
+    \item Tampilan antarmuka ini dipisahkan menjadi "Panel Aksi Baru" dan "Tabel Arsip Terdahulu". Berfokuslah pada Panel Aksi (Arsipkan Data Kelas).
+    \item Pilih kelas sasaran pada peranti *dropdown* \textbf{Kelas}.
+    \item Centang kotak berbunyi \textbf{Saya yakin ingin mengarsipkan dan MENGHAPUS data siswa dari kelas ini beserta seluruh absensinya}. Tanpa centangan ini (\textit{checkbox}), prosedur terkunci demi pengamanan lapis pertama.
+    \item Klik tombol warna merah pekat \textbf{Arsipkan \& Hapus Data Kelas}.
+    \item Akan timbul peringatan (\textit{alert}) dari *browser*. Konfirmasi kembali bahwa keputusan Anda telah valid (\textit{OK}).
+    \item Data siswa dan rekam absensi pada kelas terilih seketika lenyap dari tabel utama \textit{database}.
+\end{enumerate}
+
+\subsection{Mengambil Kembali Arsip yang Terkompresi (Download Artifact)}
+\begin{enumerate}
+    \item Pada halaman yang sama (\textbf{Arsip Kelas}), alihkan pandangan ke bagian bawah halaman pada modul tabel daftar arsip.
+    \item Telusuri baris yang memuat catatan nama arsip dengan keterangan kelas yang diretas sebelumnya.
+    \item Klik tautan warna biru bertuliskan \textbf{Download Excel} jika Anda butuh \textit{spreadsheet} kilat, atau tautan \textbf{Download ZIP} jika Anda butuh dokumen mentah seluruh data pendamping (termasuk foto, surat sakit/izin lawas, dsb).
+\end{enumerate}
+
+\section{Penanganan Masalah (Edge Cases)}
+\begin{itemize}
+    \item \textbf{Celah Path Traversal}: Beberapa aplikasi abal-abal rentan terhadap penyisipan serangan *Path Traversal* ketika *mengunduh file* arsip (meretas \textit{path} untuk mengunduh `.env` atau *root system*). EduConnect mengunci fungsi `ArchiveController` agar hanya \textit{file} dengan direktori spesifik `/archives/` dan ber-ID valid yang lolos unduh.
+    \item \textbf{Timeout Eksekusi ZIP}: Apabila kelas tersebut memilki puluhan ribu rekam absensi beserta foto lampiran izin yang memakan ukuran \textit{Gigabyte}, *server PHP* mungkin akan pingsan (*Time-out limits* 30/60 detik) sebelum berhasil men-ZIP. Disarankan mengeksekusi ini dari sisi \textit{Command Line} (*Artisan Console*) jika ruang tampung datanya tergolong level raksasa.
+\end{itemize}

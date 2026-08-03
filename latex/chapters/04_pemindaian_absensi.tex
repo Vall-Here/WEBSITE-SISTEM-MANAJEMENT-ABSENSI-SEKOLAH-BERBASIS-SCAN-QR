@@ -1,0 +1,48 @@
+\chapter{Modul Pemindaian \& Operasional Absensi}
+
+Modul Pemindaian adalah tulang punggung operasional absensi harian EduConnect. Modul ini dirancang agar mampu memproses raturan hingga ribuan siswa di gerbang secara instan tanpa mengalami hambatan antrean, baik melalui pemindai optikal (QR) maupun pencatatan darurat (Manual).
+
+\section{Konsep Dasar \& Matriks Peran}
+\begin{itemize}
+    \item \textbf{Guru Piket / Satpam (\textit{Scanner Role})}: Bertanggung jawab memegang perangkat (tablet/laptop) yang mengaktifkan kamera. Mereka tidak dapat mengubah *Master Data*, hanya memiliki hak akses untuk memicu *endpoint* absensi (otomatis dan manual).
+    \item \textbf{Siswa}: Sebagai subjek yang menunjukkan kartu fisik berisi kode QR (*Quick Response*).
+\end{itemize}
+
+\section{Skenario Dunia Nyata \& Alur Kerja}
+Pukul 06:45 pagi, siswa berdatangan ke sekolah. Guru piket sudah meletakkan *Webcam* yang terhubung ke PC Dasbor EduConnect. Fase 1: Siswa A lewat dan mendekatkan kartunya ke kamera. Bunyi "Beep" terdengar dan layar menunjukkan "Budi - Hadir". Fase 2: Siswa B datang menangis karena kartunya hilang di angkot. Guru piket menenangkan Siswa B, membuka menu Absensi Manual, mengetikkan nama "Siswa B", lalu menyimpannya sebagai "Hadir" dengan catatan "Kartu hilang". Antrean tetap berjalan lancar.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{placeholder_qr_scanner.png}
+    \caption{Antarmuka aplikasi Pemindai QR yang diakses oleh Guru Piket.}
+    \label{figure:4.1}
+\end{figure}
+
+\section{Panduan Penggunaan (Step-by-Step)}
+
+\subsection{Menjalankan Pemindai QR (Camera Scanner)}
+\begin{enumerate}
+    \item Pastikan perangkat Anda (Laptop/Tablet) terhubung ke internet dan memiliki kamera yang berfungsi.
+    \item \textit{Login} ke sistem menggunakan akun berwewenang (Admin/Guru Piket).
+    \item Pada menu utama, klik ikon/tautan \textbf{Pemindai QR}.
+    \item \textit{Browser} akan memunculkan \textit{Pop-up} peringatan keamanan ("\textit{App wants to use your camera}"). Anda wajib mengeklik \textbf{Allow} (Izinkan).
+    \item Kamera akan aktif. Arahkan kartu QR siswa ke dalam bingkai \textit{viewfinder} di tengah layar.
+    \item Jika pemindaian sukses, sistem akan berkedip hijau dan memunculkan notifikasi (\textit{Toast}) berisi nama siswa dan jam \textit{check-in} mereka. Proses ini bisa dilanjutkan terus-menerus ke siswa berikutnya.
+\end{enumerate}
+
+\subsection{Melakukan Absensi Darurat (Manual Attendance)}
+\begin{enumerate}
+    \item Jika siswa tidak membawa kartu atau kamera rusak, beralihlah ke menu navigasi \textbf{Absensi Manual}.
+    \item Anda akan melihat formulir pencarian (*autocomplete*). Klik pada kotak teks \textbf{Cari Nama atau NIS}.
+    \item Mulai ketikkan minimal 3 huruf dari nama siswa. Sistem akan otomatis menampilkan daftar sugesti siswa yang mirip di bawah kotak teks.
+    \item Klik pada nama siswa yang tepat dari daftar sugesti.
+    \item Pilih status absensi dari \textit{dropdown} \textbf{Status}. Opsi yang tersedia adalah: \textbf{Hadir}, \textbf{Terlambat}, \textbf{Izin}, dan \textbf{Sakit}.
+    \item Tambahkan keterangan pada isian teks \textbf{Catatan} (Contoh: "Hadir tanpa kartu").
+    \item Selesaikan dengan menekan tombol biru \textbf{Simpan Absensi}.
+\end{enumerate}
+
+\section{Penanganan Masalah (Edge Cases)}
+\begin{itemize}
+    \item \textbf{Pesan Error "QR Code tidak dikenal / Expired"}: Kode QR EduConnect dienkripsi dan diputar (di-\textit{generate}) setiap hari pada tengah malam melalui mekanisme \textit{Cron Job}. Kartu QR hasil cetakan kemarin atau kartu bajakan tidak akan bisa digunakan hari ini. Siswa harus meminta cetak ulang atau mengunduh QR versi hari ini di Portal mereka.
+    \item \textbf{Siswa Datang Terlambat Menimpa Status Alpha}: Jika siswa baru datang jam 09:00 pagi padahal sistem \textit{Cron Job} sudah terlanjur menandai mereka sebagai "Alpha", maka begitu QR di-*scan*, sistem secara cerdas akan mengganti statusnya dari "Alpha" menjadi "Terlambat". (Sistem tidak akan menganggapnya sedang \textit{Check-out} pulang).
+\end{itemize}

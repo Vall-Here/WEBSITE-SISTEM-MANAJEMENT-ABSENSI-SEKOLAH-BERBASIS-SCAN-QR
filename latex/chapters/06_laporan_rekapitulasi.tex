@@ -1,0 +1,44 @@
+\chapter{Modul Laporan \& Rekapitulasi}
+
+Fungsi administrasi sebuah aplikasi baru dinyatakan selesai apabila aplikasi tersebut mampu menelurkan laporan yang terstruktur dan mudah dianalisis. Modul ini menjadi jembatan antara rekam jejak digital harian dengan berkas rekapitulasi akademis, baik dalam bentuk Harian, Bulanan, maupun Statistik Personal.
+
+\section{Konsep Dasar \& Matriks Peran}
+\begin{itemize}
+    \item \textbf{Admin \& Super Admin}: Diberikan kebebasan mutlak untuk melihat, menyaring (*filter*), dan mengekspor seluruh rekaman kehadiran dari semua jenjang dan semua kelas tanpa batasan.
+    \item \textbf{Wali Kelas (\textit{Teacher})}: Menganut prinsip privasi data; laporan terkunci dan secara mekanis hanya akan menghasilkan keluaran (*output*) untuk kelas yang didelegasikan padanya. Opsi "Semua Kelas" pada \textit{dropdown} akan dihapus atau dimandulkan oleh \textit{Controller}.
+\end{itemize}
+
+\section{Skenario Dunia Nyata \& Alur Kerja}
+Di minggu terakhir tiap akhir bulan, Staf Bimbingan Konseling (BK) melakukan sidak rekapitulasi. Fase 1: Staf BK selaku Admin masuk ke menu "Laporan Bulanan", memilih rentang waktu bulan "November" tahun "2026", lalu mengeklik opsi ekspor data (Excel). Fase 2: Beliau melakukan identifikasi. Siswa C (Kelas 11 IPS) ternyata bolos (Alpha) 5 kali di bulan November. Fase 3: Staf BK membuka sub-menu "Laporan Siswa", mencari nama Siswa C, mengecek detail tanggal bolosnya, dan langsung mengeklik tombol cetak "Surat Panggilan (SP) Orang Tua" berupa file PDF resmi bersatu logo sekolah untuk dikirim hari itu juga.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{placeholder_monthly_report_filter.png}
+    \caption{Antarmuka Laporan Bulanan dengan komponen penyaring bertingkat dan opsi Export Excel.}
+    \label{figure:6.1}
+\end{figure}
+
+\section{Panduan Penggunaan (Step-by-Step)}
+
+\subsection{Menarik Rekapitulasi Laporan Bulanan (Excel)}
+\begin{enumerate}
+    \item Dari Dasbor, akses menu utama sisi kiri, cari \textbf{Laporan} dan klik sub-menu \textbf{Laporan Bulanan}.
+    \item Anda akan melihat tiga filter utama di area abu-abu atas layar.
+    \item Atur parameter \textbf{Tahun} (contoh: 2026) dan \textbf{Bulan} (contoh: November).
+    \item Atur parameter penargetan \textbf{Kelas} (contoh: Kelas 11 IPS). (Catatan: Jika Anda *login* sebagai Wali Kelas, opsi kelas selain asuhan Anda tidak akan tersedia).
+    \item Klik tombol biru solid bertuliskan \textbf{Filter}. Tabel rekap akan muncul di bawahnya, menderetkan daftar nama siswa beserta kalkulasi otomatis atas status (Hadir, Sakit, Izin, Terlambat, Alpha).
+    \item Di pojok kanan atas tabel, klik tautan \textbf{Export Excel} berwarna hijau untuk mengunduh rekap dalam \textit{spreadsheet}.
+\end{enumerate}
+
+\subsection{Meninjau Rekam Jejak Individu (Student Report)}
+\begin{enumerate}
+    \item Berpindah ke menu \textbf{Laporan Siswa}.
+    \item Ketik nomor NIS atau penggalan nama siswa di kolom teks pencarian, sistem (\textit{Autocomplete}) akan menyuguhkan kecocokan secara interaktif.
+    \item Pilih nama siswa yang dimaksud, tentukan \textbf{Bulan} dan \textbf{Tahun}, lalu tekan \textbf{Lihat Laporan}.
+    \item Halaman akan menampilkan riwayat kehadiran spesifik per tanggal, lengkap dengan waktu persis \textit{check-in} siswa tersebut pada bulan terkait.
+\end{enumerate}
+
+\section{Penanganan Masalah (Edge Cases)}
+\begin{itemize}
+    \item \textbf{Celah Ekspor Memori (Memory Exhaustion)}: Jangan pernah mengosongkan filter \textbf{Kelas} lalu mencoba mengunduh Excel Laporan Bulanan jika sekolah memiliki ribuan murid. Proses render ini sangat berat bagi *server* (\textit{Brute-force Query}). Selalu filter penarikan laporan secara bertahap (per kelas) untuk menjaga stabilitas infrastruktur \textit{server}.
+\end{itemize}

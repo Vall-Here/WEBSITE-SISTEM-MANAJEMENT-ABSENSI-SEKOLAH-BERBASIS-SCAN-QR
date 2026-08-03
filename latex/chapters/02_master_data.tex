@@ -1,0 +1,59 @@
+\chapter{Modul Master Data (Siswa, Kelas, Tahun Ajaran)}
+
+Modul Master Data adalah tulang punggung dari aplikasi EduConnect. Tanpa pengaturan data awal yang benar di modul ini, fungsi absensi dan perizinan tidak akan bisa berjalan semestinya. Modul ini mengelola data Siswa, Kelas, Guru, Mata Pelajaran, dan Tahun Ajaran.
+
+\section{Konsep Dasar \& Matriks Peran}
+\begin{itemize}
+    \item \textbf{Super Admin \& Admin}: Memiliki kontrol penuh (CRUD: \textit{Create, Read, Update, Delete}) untuk mengubah seluruh pangkalan data sekolah, termasuk menambah siswa dan menonaktifkan akun.
+    \item \textbf{Guru (\textit{Teacher})}: Tidak diberikan hak akses untuk menambah/menghapus data Master, demi mencegah manipulasi data siswa.
+\end{itemize}
+
+\section{Skenario Dunia Nyata \& Alur Kerja}
+Sekolah baru saja membuka Tahun Ajaran 2026/2027. Fase 1: Admin membuat entri "Tahun Ajaran 2026/2027" di modul Tahun Ajaran. Fase 2: Admin membuat Kelas "10 MIPA 1" dan menunjuk Bapak Budi sebagai Wali Kelas. Fase 3: Staf Tata Usaha mengimpor data 30 siswa baru ke dalam Kelas "10 MIPA 1" secara massal menggunakan berkas \textit{Excel}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{placeholder_master_data_siswa.png}
+    \caption{Tampilan halaman indeks Data Siswa beserta tombol Import Excel.}
+    \label{figure:2.1}
+\end{figure}
+
+\section{Panduan Penggunaan (Step-by-Step)}
+
+\subsection{Menambah Data Kelas Baru}
+\begin{enumerate}
+    \item Klik menu \textbf{Master Data}, lalu pilih sub-menu \textbf{Manajemen Kelas}.
+    \item Klik tombol biru \textbf{Tambah Kelas} di pojok kanan atas halaman.
+    \item Isi nama kelas pada \textit{field} teks \textbf{Nama Kelas} (contoh: 10 MIPA 1).
+    \item Tentukan tingkat kelas melalui \textit{dropdown} \textbf{Tingkat} (contoh: Kelas 10).
+    \item Hubungkan kelas dengan tahun akademik lewat \textit{dropdown} \textbf{Tahun Ajaran}.
+    \item Pilih wali kelas yang bertanggung jawab melalui \textit{dropdown} \textbf{Wali Kelas}.
+    \item Masukkan jumlah maksimal siswa pada \textit{field} angka \textbf{Kapasitas}.
+    \item Klik tombol \textbf{Simpan} (warna biru) untuk mengonfirmasi.
+\end{enumerate}
+
+\subsection{Mengimpor Data Siswa Secara Massal (Excel)}
+\begin{enumerate}
+    \item Buka menu \textbf{Master Data} $\rightarrow$ \textbf{Siswa}.
+    \item Klik tombol putih \textbf{Import Excel} di pojok kanan atas (di sebelah tombol Tambah Siswa).
+    \item Sebuah \textit{Pop-up} (Modal) berjudul \textbf{Import Data Siswa} akan muncul.
+    \item (Sangat Disarankan): Klik tautan biru \textbf{Unduh Template} jika Anda belum memiliki *file* standar dari sistem.
+    \item Pilih kelas penempatan pada \textit{dropdown} \textbf{Pilih kelas}.
+    \item Ketikkan ID Tahun Ajaran aktif pada \textit{field} angka \textbf{ID Tahun Ajaran}.
+    \item Klik pada *field* unggah berkas (\textit{Choose File}) untuk memilih *file* berekstensi \texttt{.xls} atau \texttt{.xlsx}.
+    \item Terakhir, klik tombol biru \textbf{Import} dan tunggu hingga muncul kotak notifikasi hijau/biru berisi jumlah rekaman yang berhasil dimasukkan.
+\end{enumerate}
+
+\subsection{Mengelola Status Aktif Siswa (Toggle)}
+\begin{enumerate}
+    \item Pada tabel daftar siswa, perhatikan kolom \textbf{Aksi} di bagian paling kanan.
+    \item Jika ada siswa yang *drop-out* atau lulus, klik tombol putih \textbf{Toggle} pada baris siswa tersebut.
+    \item Sistem akan menampilkan *pop-up* peringatan browser \textit{"Ubah status aktif siswa ini?"}. Klik \textbf{OK}.
+    \item Perhatikan bahwa status siswa di kolom \textbf{Status} akan berubah dari lencana *emerald* (\textbf{Aktif}) menjadi abu-abu (\textbf{Nonaktif}).
+\end{enumerate}
+
+\section{Penanganan Masalah (Edge Cases)}
+\begin{itemize}
+    \item \textbf{Gagal Import Excel (Error Format)}: Pastikan Anda tidak mengubah \textit{header} dari dokumen *template* Excel yang diunduh. Jika ada baris data yang kosong, sistem akan melompati baris tersebut, pastikan kolom Nomor Induk Siswa (NIS) tidak ada yang duplikat dengan siswa yang sudah ada.
+    \item \textbf{Tombol Hapus Gagal Ditekan}: Fitur penghapusan (tombol \textbf{Hapus} warna merah) mungkin diblokir oleh \textit{Foreign Key Constraint} jika siswa tersebut sudah memiliki rekaman absensi atau izin. Solusinya: gunakan fitur \textbf{Toggle} untuk menonaktifkan siswa alih-alih menghapusnya dari pangkalan data.
+\end{itemize}

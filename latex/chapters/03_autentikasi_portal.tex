@@ -1,54 +1,76 @@
 \chapter{Modul Autentikasi \& Portal Orang Tua}
 
-Modul \textit{Parent Portal} adalah fitur ramah pengguna (*user-facing*) yang memfasilitasi interaksi antara sekolah dan orang tua murid. Melalui portal ini, orang tua dapat melakukan swa-pantau (*self-monitoring*) atas kehadiran anak mereka secara mandiri, mengurangi beban administratif sekolah.
+Modul Autentikasi menangani dua jalur masuk yang terpisah sepenuhnya: jalur \textit{login} untuk staf internal sekolah (Admin, Guru, Piket) dan jalur \textit{portal} swa-pantau untuk orang tua atau wali murid. Melalui Portal Orang Tua, orang tua dapat memantau status kehadiran anaknya secara mandiri tanpa perlu menghubungi pihak sekolah, sekaligus mengajukan surat izin tidak hadir langsung dari \textit{smartphone} mereka.
 
 \section{Konsep Dasar \& Matriks Peran}
 \begin{itemize}
-    \item \textbf{Orang Tua / Siswa}: Hanya dapat mengakses halaman depan aplikasi (\textit{Front-end}). Mereka diberikan sesi baca-saja (*read-only*) untuk laporan kehadiran, namun diberikan wewenang untuk mengisi formulir permohonan izin/sakit.
+    \item \textbf{Staf Internal (Admin / Guru / Piket)}: Menggunakan halaman \textit{login} di URL \texttt{/login}. Otentikasi menggunakan kombinasi \textbf{Email} dan \textbf{Kata Sandi} akun yang telah dibuat oleh Super Admin.
+    \item \textbf{Orang Tua / Wali Murid}: Menggunakan halaman portal di URL \texttt{/cek-kehadiran}. Otentikasi menggunakan kombinasi \textbf{NIS} (Nomor Induk Siswa) dan \textbf{Tanggal Lahir} anak. Mereka tidak memiliki akun penuh di sistem; sesi dibuat sementara setiap kali mereka masuk.
+    \item \textbf{Pengajuan Izin Publik}: Tersedia di URL terpisah \texttt{/izin} yang dapat diakses tanpa login sama sekali, diperuntukkan bagi orang tua yang hanya ingin mengajukan izin cepat tanpa perlu melihat rekap absensi.
 \end{itemize}
 
 \section{Skenario Dunia Nyata \& Alur Kerja}
-Hari ini hujan lebat, siswa Budi tidak bisa berangkat ke sekolah karena demam. Fase 1: Ayah Budi membuka website absensi sekolah dari \textit{smartphone}. Beliau memasukkan NIS Budi dan Tanggal Lahirnya. Fase 2: Portal terbuka dan menampilkan statistik bahwa Budi bulan ini sudah hadir 90\%. Fase 3: Sang Ayah mengeklik tombol 'Pengajuan Izin', memilih status 'Sakit', mengunggah foto termometer, lalu menekan Simpan. Data langsung terkirim ke \textit{Dashboard} Admin.
+
+Hari ini siswa Budi tidak bisa berangkat karena demam tinggi. Fase 1: Ayah Budi membuka website EduConnect di \textit{smartphone} lalu menuju URL \texttt{/cek-kehadiran}. Beliau memasukkan NIS Budi dan Tanggal Lahirnya, lalu menekan tombol \textbf{Cek Kehadiran}. Fase 2: Portal terbuka dan menampilkan kartu identitas virtual Budi beserta ringkasan kehadiran bulan ini. Fase 3: Sang Ayah mengeklik tombol \textbf{Buat Pengajuan Izin Baru}, mengisi formulir dengan jenis \textit{``Sakit''}, tanggal hari ini, menulis alasan, mengunggah foto resep dokter, lalu menekan tombol \textbf{Kirim Pengajuan}. Data izin tersebut langsung masuk ke antrian di menu \textbf{Izin Siswa} milik Wali Kelas Budi.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{placeholder_portal_login.png}
-    \caption{Antarmuka Halaman Login Portal Orang Tua.}
+    \caption{Halaman Portal Orang Tua (/cek-kehadiran) dengan dua isian otentikasi: NIS dan Tanggal Lahir.}
     \label{figure:3.1}
 \end{figure}
 
 \section{Panduan Penggunaan (Step-by-Step)}
 
-\subsection{Proses Login Portal}
+\subsection{Login Staf Internal (Admin / Guru / Piket)}
 \begin{enumerate}
-    \item Buka peramban (\textit{browser}) dan akses tautan utama aplikasi EduConnect.
-    \item Anda akan dihadapkan pada dua formulir isian utama.
-    \item Masukkan Nomor Induk Siswa anak Anda pada isian teks \textbf{NIS}.
-    \item Masukkan atau pilih tanggal lahir anak Anda pada kalender *dropdown* \textbf{Tanggal Lahir}.
-    \item Klik tombol \textbf{Masuk}. Apabila kombinasi NIS dan Tanggal Lahir cocok, sistem akan membuat sesi (\textit{Session}) baru dan mengarahkan Anda ke Halaman Dasbor Siswa.
+    \item Buka \textit{browser} dan akses URL aplikasi EduConnect. Anda akan diarahkan otomatis ke halaman \textbf{Login} (\texttt{/login}).
+    \item Halaman \textit{login} menampilkan desain dua-panel: panel kiri menampilkan gambar latar belakang kampus sekolah beserta nama sekolah, panel kanan menampilkan formulir masuk.
+    \item Masukkan \textbf{Email} akun Anda (contoh: \texttt{admin@sekolah.sch.id}) pada isian teks Email.
+    \item Masukkan \textbf{Kata Sandi} pada isian kata sandi. Klik ikon mata (\textit{eye icon}) di sisi kanan isian untuk menampilkan/menyembunyikan karakter kata sandi.
+    \item (Opsional): Centang kotak \textbf{Ingat Saya} agar sesi tetap aktif selama 30 hari tanpa perlu \textit{login} ulang.
+    \item Klik tombol biru \textbf{Masuk}. Jika berhasil, Anda akan diarahkan ke halaman \textbf{Dashboard}.
 \end{enumerate}
 
-\subsection{Navigasi Dasbor Siswa}
+\subsection{Login Portal Orang Tua (/cek-kehadiran)}
 \begin{enumerate}
-    \item Setelah berhasil masuk, Anda akan melihat kartu identitas virtual siswa, mencakup Pas Foto, Nama Lengkap, dan Kelas.
-    \item Gulir layar ke bawah untuk meninjau bagian \textbf{Riwayat Absensi Terbaru}.
-    \item Area ini menampilkan tabel histori waktu \textit{Check-in}, \textit{Check-out}, serta \textit{Status} (Hadir/Alpha/Izin) khusus untuk 7 hari terakhir.
+    \item Buka \textit{browser} dan akses URL \texttt{/cek-kehadiran} pada domain aplikasi EduConnect.
+    \item Anda akan melihat formulir dengan dua isian.
+    \item Masukkan Nomor Induk Siswa anak Anda pada isian \textbf{NIS}.
+    \item Pilih atau masukkan tanggal lahir anak Anda pada isian \textbf{Tanggal Lahir}.
+    \item Klik tombol \textbf{Cek Kehadiran}. Apabila kombinasi NIS dan Tanggal Lahir cocok dengan data di sistem, Anda akan diarahkan ke halaman \textbf{Dasbor Siswa} (\texttt{/portal-ortu}).
 \end{enumerate}
 
-\subsection{Mengirim Permohonan Surat Izin}
+\subsection{Navigasi Dasbor Siswa di Portal Orang Tua}
 \begin{enumerate}
-    \item Pada area Dasbor, temukan dan klik tombol \textbf{Buat Pengajuan Izin Baru} yang mencolok.
-    \item Anda akan dibawa ke form khusus surat izin.
-    \item Tentukan jenis izin dengan mengeklik \textit{dropdown} \textbf{Pilih Jenis} (\textit{Izin} atau \textit{Sakit}).
-    \item Pilih tanggal mulai tidak hadir pada input \textbf{Tanggal Dari}.
-    \item Pilih tanggal perkiraan selesai pada input \textbf{Tanggal Sampai}.
-    \item Jabarkan deskripsi sakit atau alasan izin secara lengkap di dalam kotak teks \textbf{Alasan izin/sakit}.
-    \item Apabila memiliki surat rujukan dari dokter, klik \textbf{Pilih File} pada isian \textbf{Lampiran} dan pilih foto dari galeri Anda.
-    \item Klik tombol utama \textbf{Kirim Pengajuan} di bagian bawah formulir untuk menyerahkan dokumen ke sekolah.
+    \item Setelah berhasil masuk, Anda akan melihat kartu identitas virtual siswa, mencakup Nama Lengkap, NIS, dan Kelas.
+    \item Ringkasan statistik kehadiran periode berjalan ditampilkan dalam kartu-kartu kecil berisi total hari Hadir, Terlambat, Izin/Sakit, dan Alpha.
+    \item Bagian bawah halaman menampilkan \textbf{Riwayat Absensi Terbaru}: sebuah tabel berisi tanggal, waktu \textit{Check-in}, waktu \textit{Check-out}, dan Status kehadiran untuk 7 hari terakhir.
+\end{enumerate}
+
+\subsection{Mengirim Permohonan Izin via Portal Orang Tua}
+\begin{enumerate}
+    \item Pada halaman \textbf{Dasbor Siswa}, temukan dan klik tombol \textbf{Buat Pengajuan Izin Baru}.
+    \item Formulir izin akan terbuka.
+    \item Pilih jenis ketidakhadiran dari \textit{dropdown} \textbf{Pilih Jenis}: \textit{Izin} atau \textit{Sakit}.
+    \item Pilih tanggal mulai tidak hadir pada isian kalender \textbf{Tanggal Dari}.
+    \item Pilih tanggal perkiraan selesai pada isian kalender \textbf{Tanggal Sampai}.
+    \item Jabarkan alasan atau deskripsi kondisi secara lengkap di dalam kotak teks besar \textbf{Alasan izin/sakit}.
+    \item (Opsional namun sangat disarankan): Klik \textbf{Pilih File} pada area isian \textbf{Lampiran} dan unggah foto surat keterangan dokter atau surat resmi lainnya dari galeri.
+    \item Klik tombol \textbf{Kirim Pengajuan} di bagian bawah formulir untuk menyerahkan permohonan ke sekolah. Permohonan akan masuk ke status \textit{Pending} dan menunggu persetujuan Wali Kelas.
+\end{enumerate}
+
+\subsection{Pengajuan Izin Cepat Tanpa Login (/izin)}
+\begin{enumerate}
+    \item Orang tua dapat mengakses halaman \texttt{/izin} langsung dari \textit{browser} tanpa perlu memasukkan NIS atau tanggal lahir terlebih dahulu.
+    \item Pada halaman ini, pilih nama siswa dari \textit{dropdown} \textbf{Pilih Siswa}.
+    \item Isi jenis, tanggal, alasan, dan lampiran sesuai kebutuhan, lalu klik \textbf{Kirim Pengajuan}.
+    \item Sistem membatasi pengiriman pada 10 kali per menit dari satu alamat IP yang sama (\textit{Rate Limiting}) untuk mencegah penyalahgunaan.
 \end{enumerate}
 
 \section{Penanganan Masalah (Edge Cases)}
 \begin{itemize}
-    \item \textbf{Pesan Error "Tanggal lahir tidak sesuai"}: Pastikan format yang digunakan saat mendaftarkan siswa di \textit{Master Data} benar (biasanya YYYY-MM-DD). Segera hubungi Tata Usaha jika data tanggal lahir yang di-*input* oleh sekolah keliru.
-    \item \textbf{Pesan Error "Terlalu banyak percobaan. Silakan coba lagi dalam 1 menit"}: Ini adalah proteksi anti peretasan (\textit{Rate Limiting}). Jika orang tua salah memasukkan NIS/Tanggal Lahir lebih dari 5 kali beruntun, sistem akan memblokir alamat IP tersebut selama 60 detik. Anda harus menunggu hitungan mundur selesai.
+    \item \textbf{Pesan Error ``Tanggal lahir tidak sesuai''}: Pastikan format tanggal lahir yang dimasukkan benar. Data tanggal lahir yang terdaftar di sistem menggunakan format YYYY-MM-DD. Segera hubungi Tata Usaha jika data tanggal lahir yang tersimpan di sistem keliru.
+    \item \textbf{Pesan Error ``Terlalu banyak percobaan. Silakan coba lagi dalam 1 menit''}: Ini adalah proteksi \textit{Rate Limiting}. Halaman \texttt{/login} membatasi 5 percobaan per menit, sementara halaman \texttt{/cek-kehadiran} membatasi 10 percobaan per menit dari satu IP yang sama. Tunggu hitungan mundur selesai sebelum mencoba kembali.
+    \item \textbf{Setelah Login, Halaman Tetap di /login}: Kemungkinan besar email atau kata sandi yang dimasukkan salah. Gunakan fitur \textit{reset} kata sandi atau hubungi Administrator sistem untuk menyetel ulang akun.
 \end{itemize}

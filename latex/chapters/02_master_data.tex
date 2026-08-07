@@ -1,20 +1,21 @@
-\chapter{Modul Master Data (Siswa, Kelas, Tahun Ajaran)}
+\chapter{Modul Master Data (Siswa, Kelas, Tahun Ajaran, Guru)}
 
-Modul Master Data adalah tulang punggung dari aplikasi EduConnect. Tanpa pengaturan data awal yang benar di modul ini, fungsi absensi dan perizinan tidak akan bisa berjalan semestinya. Modul ini mengelola data Siswa, Kelas, Guru, Mata Pelajaran, dan Tahun Ajaran.
+Modul Master Data adalah fondasi dari keseluruhan sistem EduConnect. Seluruh relasi data --- kehadiran, izin, laporan --- bergantung pada keakuratan data yang dikelola di modul ini. Modul ini mencakup pengelolaan data Siswa, Kelas, Guru \& Staf, dan Tahun Ajaran. Tanpa pengaturan data awal yang benar di modul ini, fungsi absensi dan perizinan tidak akan berjalan semestinya.
 
 \section{Konsep Dasar \& Matriks Peran}
 \begin{itemize}
-    \item \textbf{Super Admin \& Admin}: Memiliki kontrol penuh (CRUD: \textit{Create, Read, Update, Delete}) untuk mengubah seluruh pangkalan data sekolah, termasuk menambah siswa dan menonaktifkan akun.
-    \item \textbf{Guru (\textit{Teacher})}: Tidak diberikan hak akses untuk menambah/menghapus data Master, demi mencegah manipulasi data siswa.
+    \item \textbf{Super Admin \& Admin}: Memiliki kontrol penuh (CRUD: \textit{Create, Read, Update, Delete}) atas seluruh data master, termasuk mengimpor siswa massal, mengatur wali kelas, dan menonaktifkan akun.
+    \item \textbf{Wali Kelas (\textit{Teacher})}: Tidak diberikan hak akses untuk menambah, mengubah, atau menghapus data Master demi mencegah manipulasi data.
 \end{itemize}
 
 \section{Skenario Dunia Nyata \& Alur Kerja}
-Sekolah baru saja membuka Tahun Ajaran 2026/2027. Fase 1: Admin membuat entri "Tahun Ajaran 2026/2027" di modul Tahun Ajaran. Fase 2: Admin membuat Kelas "10 MIPA 1" dan menunjuk Bapak Budi sebagai Wali Kelas. Fase 3: Staf Tata Usaha mengimpor data 30 siswa baru ke dalam Kelas "10 MIPA 1" secara massal menggunakan berkas \textit{Excel}.
+
+Sekolah baru saja membuka Tahun Ajaran 2026/2027. Fase 1: Admin membuat entri \textbf{Tahun Ajaran 2026/2027} di menu \textit{Tahun Ajaran}, memasukkan tanggal mulai dan tanggal selesai, lalu mengaktifkannya. Fase 2: Admin membuka menu \textbf{Data Kelas}, mengklik \textbf{Tambah Kelas}, mengisi nama ``10 MIPA 1'', memilih tingkat 10, memilih tahun ajaran aktif, menunjuk Bapak Budi dari \textit{dropdown} \textbf{Wali Kelas}, dan mengisi kapasitas 45 siswa. Fase 3: Staf Tata Usaha membuka menu \textbf{Data Siswa}, mengklik \textbf{Import Excel}, mengunduh \textit{template} standar, mengisi data 40 siswa, lalu mengunggahnya. Dalam hitungan detik, 40 siswa masuk ke sistem sekaligus.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{placeholder_master_data_siswa.png}
-    \caption{Tampilan halaman indeks Data Siswa beserta tombol Import Excel.}
+    \caption{Tampilan halaman Data Siswa beserta tombol Import Excel dan Tambah Siswa di pojok kanan atas.}
     \label{figure:2.1}
 \end{figure}
 
@@ -22,38 +23,75 @@ Sekolah baru saja membuka Tahun Ajaran 2026/2027. Fase 1: Admin membuat entri "T
 
 \subsection{Menambah Data Kelas Baru}
 \begin{enumerate}
-    \item Klik menu \textbf{Master Data}, lalu pilih sub-menu \textbf{Manajemen Kelas}.
+    \item Klik menu \textbf{Data Kelas} pada panel navigasi kiri.
     \item Klik tombol biru \textbf{Tambah Kelas} di pojok kanan atas halaman.
-    \item Isi nama kelas pada \textit{field} teks \textbf{Nama Kelas} (contoh: 10 MIPA 1).
-    \item Tentukan tingkat kelas melalui \textit{dropdown} \textbf{Tingkat} (contoh: Kelas 10).
-    \item Hubungkan kelas dengan tahun akademik lewat \textit{dropdown} \textbf{Tahun Ajaran}.
+    \item Isi nama kelas pada \textit{field} teks \textbf{Nama Kelas} (contoh: \texttt{10 MIPA 1}).
+    \item Tentukan tingkat kelas melalui \textit{dropdown} \textbf{Tingkat} (pilihan: Kelas 10, Kelas 11, atau Kelas 12).
+    \item Hubungkan kelas dengan tahun akademik aktif lewat \textit{dropdown} \textbf{Tahun Ajaran}.
     \item Pilih wali kelas yang bertanggung jawab melalui \textit{dropdown} \textbf{Wali Kelas}.
-    \item Masukkan jumlah maksimal siswa pada \textit{field} angka \textbf{Kapasitas}.
-    \item Klik tombol \textbf{Simpan} (warna biru) untuk mengonfirmasi.
+    \item Masukkan jumlah kapasitas maksimal siswa pada \textit{field} angka \textbf{Kapasitas}.
+    \item Klik tombol \textbf{Simpan} (warna biru) untuk mengonfirmasi pembuatan kelas.
+\end{enumerate}
+
+\subsection{Menyaring Data Kelas (Filter)}
+\begin{enumerate}
+    \item Pada halaman \textbf{Manajemen Kelas}, perhatikan baris filter di bagian atas tabel.
+    \item Gunakan \textit{dropdown} pertama untuk menyaring berdasarkan \textbf{Tahun Ajaran} (contoh: 2026/2027).
+    \item Gunakan \textit{dropdown} kedua untuk menyaring berdasarkan \textbf{Tingkat} (Kelas 10, 11, atau 12).
+    \item Gunakan \textit{dropdown} ketiga untuk menyaring berdasarkan \textbf{Status} (Aktif atau Nonaktif).
+    \item Klik tombol biru \textbf{Filter} untuk menerapkan pilihan.
+    \item Perhatikan kolom tabel yang tersedia: \textbf{Nama Kelas}, \textbf{Tingkat}, \textbf{Tahun Ajaran}, \textbf{Wali Kelas}, \textbf{Kapasitas}, \textbf{Siswa Aktif}, dan \textbf{Status}.
 \end{enumerate}
 
 \subsection{Mengimpor Data Siswa Secara Massal (Excel)}
 \begin{enumerate}
-    \item Buka menu \textbf{Master Data} $\rightarrow$ \textbf{Siswa}.
-    \item Klik tombol putih \textbf{Import Excel} di pojok kanan atas (di sebelah tombol Tambah Siswa).
-    \item Sebuah \textit{Pop-up} (Modal) berjudul \textbf{Import Data Siswa} akan muncul.
-    \item (Sangat Disarankan): Klik tautan biru \textbf{Unduh Template} jika Anda belum memiliki *file* standar dari sistem.
-    \item Pilih kelas penempatan pada \textit{dropdown} \textbf{Pilih kelas}.
-    \item Ketikkan ID Tahun Ajaran aktif pada \textit{field} angka \textbf{ID Tahun Ajaran}.
-    \item Klik pada *field* unggah berkas (\textit{Choose File}) untuk memilih *file* berekstensi \texttt{.xls} atau \texttt{.xlsx}.
-    \item Terakhir, klik tombol biru \textbf{Import} dan tunggu hingga muncul kotak notifikasi hijau/biru berisi jumlah rekaman yang berhasil dimasukkan.
+    \item Buka menu \textbf{Data Siswa} pada panel navigasi kiri.
+    \item Klik tombol putih \textbf{Import Excel} yang berada di baris tombol kanan atas (di sebelah kiri tombol \textbf{Tambah Siswa}).
+    \item Sebuah jendela \textit{modal} berjudul \textbf{Import Data Siswa} akan muncul di tengah layar.
+    \item (Sangat Disarankan): Klik tautan \textbf{Unduh Template Excel} untuk mendapatkan berkas standar yang \textit{header}-nya sudah benar.
+    \item Pada \textit{dropdown} \textbf{Pilih Kelas}, pilih kelas penempatan siswa yang akan diimpor.
+    \item Klik pada area unggah berkas (\textbf{Pilih File}) untuk memilih berkas berekstensi \texttt{.xls} atau \texttt{.xlsx} dari komputer Anda.
+    \item Klik tombol biru \textbf{Import} dan tunggu. Sistem akan menampilkan notifikasi biru berisi ringkasan: \textit{``Import selesai. Total: X, berhasil: Y, gagal: Z''}.
 \end{enumerate}
 
-\subsection{Mengelola Status Aktif Siswa (Toggle)}
+\subsection{Menyaring Data Siswa}
 \begin{enumerate}
-    \item Pada tabel daftar siswa, perhatikan kolom \textbf{Aksi} di bagian paling kanan.
-    \item Jika ada siswa yang *drop-out* atau lulus, klik tombol putih \textbf{Toggle} pada baris siswa tersebut.
-    \item Sistem akan menampilkan *pop-up* peringatan browser \textit{"Ubah status aktif siswa ini?"}. Klik \textbf{OK}.
-    \item Perhatikan bahwa status siswa di kolom \textbf{Status} akan berubah dari lencana *emerald* (\textbf{Aktif}) menjadi abu-abu (\textbf{Nonaktif}).
+    \item Pada halaman \textbf{Data Siswa}, perhatikan baris filter yang memiliki tiga komponen.
+    \item Gunakan \textit{dropdown} \textbf{Semua Kelas (Pilih Kelas untuk Cetak Massal)} untuk menyaring siswa berdasarkan kelas sekaligus mengaktifkan tombol cetak kartu massal.
+    \item Gunakan kotak teks \textbf{Cari nama atau NIS} untuk pencarian bebas.
+    \item Gunakan \textit{dropdown} \textbf{Semua Status} untuk memilih antara \textbf{Aktif} atau \textbf{Nonaktif}.
+    \item Klik tombol biru \textbf{Terapkan Filter} untuk menampilkan hasilnya.
+\end{enumerate}
+
+\subsection{Kolom Aksi pada Tabel Siswa}
+Setiap baris siswa pada tabel memiliki lima tombol aksi di kolom paling kanan:
+\begin{itemize}
+    \item \textbf{Kartu} (lencana ungu/\textit{indigo}): Mengunduh kartu identitas siswa (dengan QR Code) dalam format PDF pada tab browser baru.
+    \item \textbf{Detail}: Membuka halaman profil lengkap siswa beserta riwayat absensi singkat.
+    \item \textbf{Edit}: Membuka formulir pengeditan data siswa.
+    \item \textbf{Toggle}: Mengubah status aktif/nonaktif siswa. Sistem akan memunculkan dialog konfirmasi browser \textit{``Ubah status aktif siswa ini?''} sebelum mengeksekusi.
+    \item \textbf{Hapus} (warna merah): Menghapus data siswa. Sistem akan memunculkan dialog konfirmasi \textit{``Yakin ingin menghapus siswa ini?''}. Perhatian: fitur ini akan diblokir oleh sistem jika siswa sudah memiliki rekaman absensi atau izin (\textit{Foreign Key Constraint}).
+\end{itemize}
+
+\subsection{Cetak Kartu QR Seluruh Kelas (Massal)}
+\begin{enumerate}
+    \item Pada halaman \textbf{Data Siswa}, gunakan filter \textit{dropdown} \textbf{Semua Kelas} dan pilih salah satu kelas spesifik.
+    \item Klik tombol \textbf{Terapkan Filter}. Setelah halaman dimuat ulang dengan data kelas yang dipilih, sebuah tombol baru akan muncul di baris tombol kanan atas.
+    \item Klik tombol ungu \textbf{Cetak Kartu Kelas (A4 PDF)}. Sistem akan menghasilkan berkas PDF berisi seluruh kartu QR siswa di kelas tersebut yang sudah tersusun rapi dalam format A4, siap untuk dicetak dan dipotong.
+\end{enumerate}
+
+\subsection{Mengelola Data Guru \& Staf}
+\begin{enumerate}
+    \item Klik menu \textbf{Guru \& Staf} pada kelompok menu \textbf{Sistem \& Pengaturan} di panel navigasi kiri.
+    \item Tabel menampilkan kolom: \textbf{Nama}, \textbf{Email} (sebagai kredensial login), \textbf{Peran} (\textit{Role}), dan \textbf{Status}.
+    \item Untuk menambah guru atau staf baru, klik tombol biru \textbf{Tambah} di pojok kanan atas.
+    \item Isi formulir yang mencakup: \textbf{Nama}, \textbf{Email}, \textbf{Kata Sandi}, dan \textbf{Peran} (\textit{dropdown}: \textit{admin}, \textit{teacher}, \textit{staff}).
+    \item Setiap baris guru juga memiliki tombol \textbf{Toggle} untuk menonaktifkan akun tanpa menghapus datanya.
 \end{enumerate}
 
 \section{Penanganan Masalah (Edge Cases)}
 \begin{itemize}
-    \item \textbf{Gagal Import Excel (Error Format)}: Pastikan Anda tidak mengubah \textit{header} dari dokumen *template* Excel yang diunduh. Jika ada baris data yang kosong, sistem akan melompati baris tersebut, pastikan kolom Nomor Induk Siswa (NIS) tidak ada yang duplikat dengan siswa yang sudah ada.
-    \item \textbf{Tombol Hapus Gagal Ditekan}: Fitur penghapusan (tombol \textbf{Hapus} warna merah) mungkin diblokir oleh \textit{Foreign Key Constraint} jika siswa tersebut sudah memiliki rekaman absensi atau izin. Solusinya: gunakan fitur \textbf{Toggle} untuk menonaktifkan siswa alih-alih menghapusnya dari pangkalan data.
+    \item \textbf{Gagal Import Excel (Error Format)}: Pastikan Anda tidak mengubah baris \textit{header} dari \textit{template} Excel yang diunduh. Jika ada data kolom NIS yang duplikat dengan siswa yang sudah ada di sistem, baris tersebut akan dilewati dan dicatat sebagai ``gagal'' pada notifikasi hasil impor.
+    \item \textbf{Tombol Hapus Gagal Dieksekusi}: Fitur hapus siswa akan diblokir jika siswa tersebut sudah memiliki rekaman absensi, token QR, atau surat izin yang terhubung (\textit{Foreign Key Constraint}). Solusi yang benar adalah menggunakan tombol \textbf{Toggle} untuk menonaktifkan siswa, bukan menghapusnya.
+    \item \textbf{Filter Kelas Tidak Menampilkan Data}: Pastikan kelas yang dipilih sudah memiliki status \textbf{Aktif} dan sudah terisi siswa. Kelas dengan status \textbf{Nonaktif} tidak akan muncul pada beberapa filter pilihan di modul lain.
 \end{itemize}

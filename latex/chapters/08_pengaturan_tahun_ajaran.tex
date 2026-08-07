@@ -1,0 +1,70 @@
+\chapter{Modul Pengaturan Sistem \& Tahun Ajaran}
+
+Modul Pengaturan Sistem adalah tempat di mana Administrator mengkonfigurasi parameter operasional inti EduConnect. Modul ini terbagi menjadi tiga sub-halaman yang diakses melalui tiga tab navigasi: \textbf{Pengaturan Umum} (identitas sekolah dan ikon), \textbf{Aturan Absensi} (jam masuk, jam pulang, toleransi keterlambatan), dan \textbf{Jadwal Kelas}. Di luar sub-halaman pengaturan, terdapat juga modul khusus \textbf{Tahun Ajaran} yang mengelola data tahun akademik aktif.
+
+\section{Konsep Dasar \& Matriks Peran}
+\begin{itemize}
+    \item \textbf{Super Admin \& Admin}: Merupakan satu-satunya peran yang memiliki akses ke seluruh sub-halaman pengaturan ini.
+    \item \textbf{Wali Kelas \& Staf}: Tidak memiliki akses ke modul Pengaturan dan Tahun Ajaran.
+\end{itemize}
+
+\section{Skenario Dunia Nyata \& Alur Kerja}
+
+Di awal tahun ajaran baru, Admin IT sekolah perlu menyesuaikan dua konfigurasi. Fase 1: Ia membuka menu \textbf{Pengaturan Sekolah} $\rightarrow$ sub-tab \textbf{Aturan Absensi}. Ia mengubah nilai \textbf{Batas Waktu Tepat Waktu} dari \texttt{07:00} menjadi \texttt{07:15} karena kebijakan baru sekolah, lalu mengklik \textbf{Simpan Aturan Absensi}. Fase 2: Ia membuka menu \textbf{Tahun Ajaran}, klik \textbf{Tambah Data}, mengisi nama \textit{``2026/2027''} beserta tanggal mulai dan selesai, menyimpannya, lalu mengklik tombol \textbf{Jadikan Aktif} pada baris tahun ajaran baru itu. Sistem akan menonaktifkan tahun ajaran sebelumnya secara otomatis.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{placeholder_settings_attendance.png}
+    \caption{Halaman Aturan Absensi dengan tiga tab navigasi di atas dan lima isian konfigurasi jam absensi.}
+    \label{figure:8.1}
+\end{figure}
+
+\section{Panduan Penggunaan (Step-by-Step)}
+
+\subsection{Mengatur Informasi Umum Sekolah}
+\begin{enumerate}
+    \item Pada panel navigasi kiri (kelompok \textbf{Sistem \& Pengaturan}), klik menu \textbf{Pengaturan Sekolah}.
+    \item Anda akan melihat tiga tombol tab di bagian atas: \textbf{Pengaturan Umum}, \textbf{Aturan Absensi}, dan \textbf{Jadwal Kelas}. Tab yang aktif berwarna biru.
+    \item Pastikan tab \textbf{Pengaturan Umum} sedang aktif (URL: \texttt{/admin/school-settings}).
+    \item Ubah nama sekolah pada isian teks \textbf{Nama Sekolah}.
+    \item Untuk mengganti ikon \textit{favicon} (ikon kecil di tab \textit{browser}), klik tombol \textbf{Pilih File} di bagian \textbf{Favicon Sekolah (Ikon Website)}, lalu pilih berkas gambar berformat \texttt{.ico}, \texttt{.png}, atau \texttt{.jpg} (maksimal 1 MB, disarankan bentuk persegi 512x512px).
+    \item Isian \textbf{Timezone Aplikasi} bersifat informasional dan tidak dapat diubah melalui antarmuka (diambil dari konfigurasi \texttt{APP\_TIMEZONE} di berkas \texttt{.env}).
+    \item Klik tombol biru \textbf{Simpan Pengaturan} di pojok kanan bawah formulir.
+\end{enumerate}
+
+\subsection{Mengatur Aturan Jam Absensi}
+\begin{enumerate}
+    \item Pada halaman \textbf{Pengaturan Sekolah}, klik tab \textbf{Aturan Absensi} (URL: \texttt{/admin/settings/attendance}).
+    \item Formulir ini memiliki lima isian konfigurasi:
+    \begin{itemize}
+        \item \textbf{Jam Mulai Check-in}: Waktu paling awal sistem mulai menerima pemindaian QR sebagai absensi masuk pagi (format \texttt{HH:MM}).
+        \item \textbf{Batas Waktu Tepat Waktu}: Batas jam terakhir pemindaian dihitung sebagai status \textbf{Hadir} (bukan Terlambat).
+        \item \textbf{Toleransi Keterlambatan (menit)}: Jumlah menit tambahan setelah batas tepat waktu sebelum siswa dianggap Terlambat penuh.
+        \item \textbf{Jam Mulai Check-out}: Waktu paling awal sistem mulai menerima pemindaian QR sebagai absensi pulang sore.
+        \item \textbf{Jam Auto Alpha}: Jam di mana \textit{Cron Job} sistem secara otomatis menandai siswa yang belum scan sama sekali sebagai \textbf{Alpha}.
+    \end{itemize}
+    \item Di bawah isian jam, terdapat dua pengaturan \textit{toggle} (centang) untuk notifikasi WhatsApp:
+    \begin{itemize}
+        \item \textbf{Notif Absen Masuk}: Aktifkan untuk mengirimkan notifikasi WhatsApp ke orang tua setiap kali siswa melakukan \textit{check-in}.
+        \item \textbf{Notif Absen Pulang}: Aktifkan untuk mengirimkan notifikasi \textit{check-out}.
+    \end{itemize}
+    \item Klik tombol biru \textbf{Simpan Aturan Absensi} untuk menyimpan.
+\end{enumerate}
+
+\subsection{Mengelola Tahun Ajaran}
+\begin{enumerate}
+    \item Pada panel navigasi kiri, klik menu \textbf{Tahun Ajaran} di kelompok \textbf{Sistem \& Pengaturan}.
+    \item Tabel menampilkan kolom: \textbf{Nama Tahun Ajaran}, \textbf{Tanggal Mulai}, \textbf{Tanggal Selesai}, \textbf{Status}, dan \textbf{Aksi}.
+    \item Tahun ajaran yang sedang aktif menampilkan lencana hijau \textbf{Sedang Aktif} pada kolom Status. Tahun ajaran yang tidak aktif menampilkan tombol abu-abu \textbf{Jadikan Aktif}.
+    \item Untuk menambah tahun ajaran baru, klik tombol biru \textbf{Tambah Data} di pojok kanan atas.
+    \item Isi formulir dengan \textbf{Nama} (contoh: \texttt{2026/2027}), \textbf{Tanggal Mulai}, dan \textbf{Tanggal Selesai}, lalu klik \textbf{Simpan}.
+    \item Untuk mengaktifkan tahun ajaran baru, klik tombol abu-abu \textbf{Jadikan Aktif} pada baris yang diinginkan. Sistem akan otomatis menonaktifkan tahun ajaran yang sebelumnya aktif.
+    \item Untuk menghapus tahun ajaran, klik tombol merah \textbf{Hapus}. Sistem akan memunculkan konfirmasi browser \textit{``Yakin ingin menghapus tahun ajaran ini?''}.
+\end{enumerate}
+
+\section{Penanganan Masalah (Edge Cases)}
+\begin{itemize}
+    \item \textbf{Perubahan Jam Absensi Tidak Berlaku Retroaktif}: Mengubah \textbf{Batas Waktu Tepat Waktu} hanya memengaruhi absensi yang masuk \textbf{setelah} pengaturan disimpan. Rekaman absensi yang sudah ada di \textit{database} tidak akan diubah secara otomatis.
+    \item \textbf{Tidak Bisa Menghapus Tahun Ajaran}: Tahun ajaran yang sudah terhubung dengan data kelas aktif tidak dapat dihapus karena \textit{Foreign Key Constraint}. Nonaktifkan terlebih dahulu semua kelas yang terhubung, atau arsipkan kelas-kelas tersebut melalui modul Arsip Kelas.
+    \item \textbf{Notifikasi WhatsApp Tidak Terkirim}: Pastikan konfigurasi \texttt{WHATSAPP\_ENABLED=true} dan detail API WhatsApp sudah diisi dengan benar di berkas \texttt{.env} \textit{server}. Pengaturan \textit{toggle} notifikasi di halaman ini hanya berfungsi jika integrasi WhatsApp sudah aktif di level infrastruktur.
+\end{itemize}

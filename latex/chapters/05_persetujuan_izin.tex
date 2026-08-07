@@ -1,53 +1,75 @@
 \chapter{Modul Persetujuan Izin (Leave Requests)}
 
-Modul ini dirancang khusus untuk memoderasi dan memvalidasi ketidakhadiran siswa. Surat izin yang masuk dari Portal Orang Tua tidak akan otomatis masuk ke data absensi tanpa melewati penyaringan (Filter) terlebih dahulu oleh Wali Kelas yang berwenang.
+Modul Izin Siswa dirancang sebagai sistem moderasi dan validasi ketidakhadiran yang terstruktur. Surat izin yang masuk dari Portal Orang Tua tidak akan otomatis mengubah data absensi tanpa melewati penyaringan dan persetujuan oleh Wali Kelas yang berwenang. Selain itu, Admin dapat membuat pengajuan izin langsung dari panel ini tanpa harus melalui Portal Orang Tua.
 
 \section{Konsep Dasar \& Matriks Peran}
 \begin{itemize}
-    \item \textbf{Wali Kelas (\textit{Teacher})}: Memiliki otoritas mutlak untuk memeriksa, menyetujui, dan menolak surat permohonan izin milik siswa yang berada di dalam asuhan kelasnya saja. (Fitur keamanan \textit{IDOR} menyembunyikan data izin dari kelas lain).
-    \item \textbf{Admin Sekolah}: Memiliki akses penuh atau \textit{Override} ke seluruh pengajuan izin dari seluruh kelas yang ada, digunakan dalam kondisi darurat jika wali kelas berhalangan.
+    \item \textbf{Wali Kelas (\textit{Teacher})}: Memiliki otoritas untuk memeriksa, menyetujui (\textit{Approve}), dan menolak (\textit{Reject}) surat permohonan izin milik siswa yang berada di dalam asuhan kelasnya. Sistem keamanan (\textit{IDOR Protection}) menyembunyikan data izin kelas lain dari pandangan Wali Kelas.
+    \item \textbf{Admin \& Super Admin}: Memiliki akses penuh ke seluruh pengajuan izin dari semua kelas. Dapat membuat pengajuan izin baru langsung dari panel admin (tanpa melalui Portal Orang Tua) untuk kondisi darurat.
 \end{itemize}
 
 \section{Skenario Dunia Nyata \& Alur Kerja}
-Wali Kelas 10A, Bapak Budi, duduk di mejanya dan memeriksa \textit{Dashboard} EduConnect. Ia melihat ada antrean 2 permohonan izin hari ini. Fase 1: Bapak Budi membuka permohonan pertama dari Siswa X. Bapak Budi mengeklik tulisan biru "Lihat" di kolom Lampiran, dan mendapati foto surat keterangan dari puskesmas setempat. Fase 2: Karena terbukti sah, Bapak Budi mengeklik tombol "Setujui" berwarna hijau. Sistem seketika mengubah status Siswa X hari ini menjadi \textit{Sakit}. Fase 3: Bapak Budi membuka permohonan kedua dari Siswa Y. Alasannya "Jalan-jalan ke Bali". Bapak Budi berang, mengisi form alasan dengan kalimat "Izin liburan ditolak saat masa ujian", lalu mengeklik tombol "Tolak" berwarna merah.
+
+Wali Kelas 10A, Bapak Budi, membuka EduConnect di meja kerjanya. Fase 1: Ia mengklik menu \textbf{Izin Siswa} dan menyaring tampilan dengan memilih \textit{``Pending''} pada filter Status. Muncul dua permohonan. Fase 2: Bapak Budi mengklik tautan biru \textbf{Lihat} di kolom Lampiran permohonan pertama. Tabulasi baru di \textit{browser} menampilkan foto surat keterangan dari puskesmas setempat. Karena terbukti sah, ia mengeklik tombol \textbf{Setujui}. Sistem seketika mengubah status absensi siswa tersebut menjadi \textit{Sakit}. Fase 3: Bapak Budi membuka permohonan kedua. Alasannya tidak masuk akal. Ia mengisi kotak teks kecil \textbf{Alasan} dengan kalimat singkat \textit{``Izin tidak sah''}, lalu mengklik tombol merah \textbf{Tolak}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{placeholder_leave_approval_list.png}
-    \caption{Tabel indeks Izin Siswa beserta tombol aksi (Setujui/Tolak) yang tersemat di ujung kanan tabel.}
+    \caption{Tabel daftar Izin Siswa beserta tombol Setujui (hijau) dan Tolak (merah) di kolom Aksi paling kanan.}
     \label{figure:5.1}
 \end{figure}
 
 \section{Panduan Penggunaan (Step-by-Step)}
 
+\subsection{Membuat Pengajuan Izin Langsung dari Panel Admin}
+\begin{enumerate}
+    \item Pada panel navigasi kiri, klik menu \textbf{Izin Siswa}.
+    \item Di bagian paling atas halaman, terdapat formulir berjudul \textbf{Buat Pengajuan Izin} yang dapat langsung diisi oleh Admin.
+    \item Pilih nama siswa dari \textit{dropdown} \textbf{Pilih Siswa}.
+    \item Pilih jenis ketidakhadiran dari \textit{dropdown} \textbf{Pilih Jenis}: \textbf{Izin} atau \textbf{Sakit}.
+    \item Isi tanggal mulai pada isian \textbf{Tanggal Dari} (format \texttt{dd-mm-yyyy}).
+    \item Isi tanggal selesai pada isian \textbf{Tanggal Sampai}.
+    \item Tulis alasan pada kotak teks besar \textbf{Alasan izin/sakit}.
+    \item Klik tombol biru \textbf{Simpan} untuk menyimpan pengajuan.
+\end{enumerate}
+
+\subsection{Menyaring Daftar Izin (Filter)}
+\begin{enumerate}
+    \item Di bawah formulir pembuatan izin, terdapat baris filter yang memiliki dua komponen.
+    \item Gunakan \textit{dropdown} pertama untuk menyaring berdasarkan \textbf{Status}: \textbf{Semua Status}, \textbf{Pending} (Menunggu), \textbf{Approved} (Disetujui), atau \textbf{Rejected} (Ditolak).
+    \item Gunakan \textit{dropdown} kedua untuk menyaring berdasarkan \textbf{Kelas} (Semua Kelas atau kelas spesifik).
+    \item Klik tombol biru \textbf{Filter} untuk menampilkan hasilnya.
+    \item Tabel akan menampilkan kolom: \textbf{Siswa} (Nama + Kelas), \textbf{Rentang Tanggal}, \textbf{Jenis}, \textbf{Status}, \textbf{Alasan}, \textbf{Lampiran}, dan \textbf{Aksi}.
+\end{enumerate}
+
 \subsection{Melakukan Evaluasi Lampiran Izin}
 \begin{enumerate}
-    \item Di menu navigasi utama (Panel Kiri), cari dan klik menu \textbf{Izin Siswa}.
-    \item Anda akan melihat tabel yang merangkum nama siswa, rentang tanggal tidak masuk, jenis izin, dan status persetujuan saat ini (Pending, Approved, Rejected).
-    \item Persempit pencarian Anda dengan menggunakan alat saring. Pilih \textbf{Pending} dari \textit{dropdown} pertama, pilih kelas asuhan Anda pada \textit{dropdown} kedua, lalu tekan tombol biru \textbf{Filter}.
-    \item Fokus pada kolom \textbf{Lampiran}. Jika tertera tulisan tebal berwarna biru \textbf{Lihat}, artinya ada berkas yang disisipkan.
-    \item Klik kata \textbf{Lihat} tersebut. Gambar lampiran akan terbuka pada tabulasi *browser* yang baru (\textit{New Tab}). Evaluasi validitas dokumen tersebut.
+    \item Pada tabel izin, fokus pada kolom \textbf{Lampiran}.
+    \item Jika tertera tautan berwarna biru bertuliskan \textbf{Lihat}, artinya ada berkas (foto/dokumen) yang dilampirkan oleh orang tua.
+    \item Klik kata \textbf{Lihat} tersebut. Gambar lampiran akan terbuka di tabulasi \textit{browser} yang baru (\textit{New Tab}). Evaluasi validitas dokumen tersebut sebelum mengambil keputusan.
+    \item Jika kolom Lampiran menampilkan tanda \textbf{-}, berarti tidak ada lampiran yang disertakan.
 \end{enumerate}
 
 \subsection{Menyetujui Permohonan (Approve)}
 \begin{enumerate}
-    \item Setelah memastikan dokumen sah, kembalilah ke tabulasi tabel Izin Siswa.
-    \item Arahkan kursor ke ujung kanan tabel (Kolom \textbf{Aksi}) di baris nama siswa yang bersangkutan.
-    \item Klik tombol ber-lis hijau (emerald) bertuliskan \textbf{Setujui}.
-    \item *Page* akan memuat ulang, notifikasi sukses hijau akan muncul di atas halaman, dan \textit{database} absen seketika terisi otomatis.
+    \item Setelah memastikan dokumen sah, kembalilah ke tabel Izin Siswa.
+    \item Arahkan pandangan ke kolom \textbf{Aksi} di ujung kanan tabel pada baris siswa yang bersangkutan.
+    \item Tombol \textbf{Setujui} dan \textbf{Tolak} hanya muncul jika status pengajuan masih \textbf{Pending}. Pengajuan yang sudah diproses menampilkan tulisan kecil abu-abu \textit{``Sudah diproses''}.
+    \item Klik tombol ber-lis hijau (\textit{emerald}) bertuliskan \textbf{Setujui}.
+    \item Halaman akan memuat ulang, notifikasi sukses hijau akan muncul di atas halaman, dan rekaman absensi untuk tanggal yang bersangkutan akan otomatis terisi sesuai jenis izin.
 \end{enumerate}
 
 \subsection{Menolak Permohonan (Reject)}
 \begin{enumerate}
-    \item Apabila dokumen dicurigai palsu atau alasan tidak rasional, cari baris nama siswa pada tabel.
-    \item Di kolom \textbf{Aksi}, tepat di sebelah tombol "Setujui", terdapat kotak input teks berukuran kecil dengan *placeholder* \textbf{Alasan}.
-    \item Anda \textbf{DIWAJIBKAN} mengetik alasan penolakan secara ringkas (contoh: "Dokumen kedaluwarsa").
-    \item Setelah mengisi kotak teks, barulah Anda boleh mengeklik tombol ber-lis merah bertuliskan \textbf{Tolak}.
-    \item Jika Anda mencoba mengeklik tombol "Tolak" tanpa mengisi alasan, form akan menolak \textit{submit} (*HTML5 required validation*).
+    \item Di kolom \textbf{Aksi}, perhatikan bahwa di sebelah kiri tombol \textbf{Tolak} terdapat sebuah kotak isian teks kecil dengan \textit{placeholder} \textbf{Alasan}.
+    \item Anda \textbf{DIWAJIBKAN} mengetik alasan penolakan secara ringkas di kotak tersebut (contoh: \textit{``Dokumen kedaluwarsa''} atau \textit{``Alasan tidak rasional''}).
+    \item Setelah mengisi kotak teks alasan, barulah klik tombol ber-lis merah bertuliskan \textbf{Tolak}.
+    \item Jika Anda mencoba mengeklik tombol \textbf{Tolak} tanpa mengisi alasan, formulir akan menolak \textit{submit} karena validasi HTML5 mewajibkan pengisian isian \textit{``required''}.
 \end{enumerate}
 
 \section{Penanganan Masalah (Edge Cases)}
 \begin{itemize}
-    \item \textbf{Status Berubah namun Absensi Kosong}: Sesuai aturan logika \textit{Free Pass Absensi}, jika permohonan \textbf{diterima}, maka tanggal mulai hingga tanggal selesai (\texttt{date\_from} ke \texttt{date\_to}) akan disinkronisasikan ke tabel absensi. Namun jika permohonan \textbf{ditolak}, maka data tabel absensi akan dibiarkan kosong melompong. Kekosongan ini nantinya akan otomatis disapu oleh \textit{Cron Job} sistem di sore hari dan dianggap sebagai Alpha (bolos).
-    \item \textbf{Lampiran Tidak Bisa Dibuka (Error 404)}: Masalah ini kerap terjadi jika *server administrator* gagal membuat \textit{symlink} direktori (\texttt{php artisan storage:link}). Beritahukan teknisi sistem untuk mengecek \textit{symlink} folder publik.
+    \item \textbf{Status ``Disetujui'' namun Absensi Kosong}: Jika permohonan disetujui (\textit{Approved}), sistem akan secara otomatis membuat rekaman absensi untuk setiap tanggal dalam rentang \texttt{date\_from} hingga \texttt{date\_to} dengan status sesuai jenis izin (Izin atau Sakit). Namun jika rentang tanggalnya mencakup hari libur nasional, tanggal libur tersebut akan dilewati. Periksa pengaturan Hari Libur di modul \textbf{Hari Libur}.
+    \item \textbf{Lampiran Tidak Bisa Dibuka (Error 404)}: Masalah ini terjadi jika Administrator \textit{server} belum membuat \textit{symlink} direktori penyimpanan publik. Beritahukan teknisi sistem untuk menjalankan perintah \texttt{php artisan storage:link} di \textit{server}.
+    \item \textbf{Tombol Setujui/Tolak Tidak Muncul}: Pastikan filter status yang aktif adalah \textbf{Pending} atau \textbf{Semua Status}. Pengajuan dengan status Approved atau Rejected tidak menampilkan tombol aksi lagi.
 \end{itemize}

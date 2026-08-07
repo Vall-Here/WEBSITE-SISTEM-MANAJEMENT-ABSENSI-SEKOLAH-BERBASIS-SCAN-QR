@@ -6,15 +6,54 @@
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{geometry}
-\geometry{a4paper, margin=1in}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm}
 
-\title{\textbf{EduConnect: Enterprise User Manual}}
+% --- Hyperref Setup ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!70!black,
+    urlcolor=blue!70!black,
+    pdfauthor={Departemen Sistem Informasi},
+    pdftitle={EduConnect Enterprise User Manual},
+    pdfsubject={Panduan Penggunaan Sistem Manajemen Absensi EduConnect}
+}
+
+% --- Header / Footer ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{EduConnect --- Enterprise User Manual}}
+\fancyhead[R]{\small\textit{\leftmark}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% --- Title Formatting ---
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{blue!70!black}}
+  {Bab \thechapter}{10pt}{\Huge}
+
+\title{
+    \vspace{2cm}
+    {\Huge\bfseries EduConnect}\\[0.5em]
+    {\Large\textit{Enterprise User Manual}}\\[1.5em]
+    {\normalsize Sistem Manajemen Kehadiran Berbasis QR Code}\\
+    \vspace{1cm}
+    \rule{\linewidth}{0.5pt}
+}
 \author{Departemen Sistem Informasi}
-\date{\today}
+\date{Versi 1.1 --- \today}
 
 \begin{document}
 
 \maketitle
+
+\begin{abstract}
+Dokumen ini merupakan panduan penggunaan resmi sistem EduConnect tingkat \textit{enterprise}. Seluruh prosedur, nama tombol, label isian, dan alur kerja yang tertulis dalam dokumen ini disusun langsung berdasarkan analisis kode sumber aplikasi (\textit{source of truth}) dan bukan dari asumsi umum. Panduan ini ditujukan bagi Super Admin, Admin, Wali Kelas, dan Guru Piket yang mengoperasikan sistem EduConnect pada keseharian manajemen absensi sekolah.
+\end{abstract}
+
 \tableofcontents
 \newpage
 
@@ -25,5 +64,7 @@
 \include{chapters/05_persetujuan_izin}
 \include{chapters/06_laporan_rekapitulasi}
 \include{chapters/07_pemeliharaan_arsip}
+\include{chapters/08_pengaturan_tahun_ajaran}
+\include{chapters/09_wali_kelas}
 
 \end{document}

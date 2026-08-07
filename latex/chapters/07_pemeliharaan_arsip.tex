@@ -1,45 +1,51 @@
 \chapter{Modul Pemeliharaan \& Arsip (Maintenance \& Archive)}
 
-Lompatan tahun ajaran selalu membawa masalah klasik: penumpukan sisa rekam jejak digital yang memberatkan sistem. EduConnect mengatasi ini melalui Modul Pemeliharaan dan Arsip yang didesain untuk mereset ruang kerja secara aman, membersihkan *cache* aplikasi, serta memproteksi data lawas ke dalam balutan arsip terkompresi.
+Setiap lompatan tahun ajaran menghasilkan ribuan baris data rekam jejak digital yang memberatkan sistem. EduConnect mengatasi ini melalui Modul Pemeliharaan dan Arsip yang dirancang untuk mereset ruang kerja secara aman: mengemas seluruh data kelas yang lulus ke dalam arsip berisi rekap Excel dan berkas \textit{ZIP}, lalu membersihkan tabel-tabel utama \textit{database} untuk menyambut angkatan baru.
 
 \section{Konsep Dasar \& Matriks Peran}
 \begin{itemize}
-    \item \textbf{Super Admin}: Satusatunya peran berdaulat yang menduduki puncak takhta wewenang (*god-mode*). Hanya Super Admin yang berhak memencet tombol eksekusi \textit{Archive Data}. Guru, bahkan level Admin sekalipun tidak diperkenankan bermain di area berbahaya ini guna menghambat insiden salah ketik (\textit{fat-finger}) yang menghapus data secara permanen.
+    \item \textbf{Super Admin \& Admin}: Merupakan satu-satunya peran yang dapat mengakses dan mengeksekusi prosedur arsip. Akses ke menu \textbf{Arsip Kelas} pada grup \textbf{Sistem \& Pengaturan} dikunci secara ketat dari peran Wali Kelas dan Staf.
 \end{itemize}
 
 \section{Skenario Dunia Nyata \& Alur Kerja}
-Penghujung bulan Juni 2026, tahun ajaran usai. Siswa kelas 12 telah diluluskan secara seremonial. Fase 1: Super Admin IT sekolah mengakses panel rahasia "Arsip Kelas". Fase 2: Beliau memilih opsi target "Kelas 12 MIPA 1", menandai kotak persetujuan penghapusan memori persisten, dan mengeksekusi "Arsipkan \& Hapus". Fase 3: Di balik layar (secara asinkron), aplikasi mengekstrak riwayat 12 MIPA 1, menyatukannya menjadi \texttt{12-mipa-1\_2026.zip}, memasukkannya ke lumbung \textit{Storage File System}, lalu menebas seluruh data absen dan relasi siswa bersangkutan di *database* tabel utama sehingga kapasitas sistem menjadi lega kembali untuk menyambut Tahun Ajaran 2027.
+
+Penghujung bulan Juni 2026, tahun ajaran usai. Kelas 12 sudah diluluskan secara seremonial. Fase 1: Super Admin IT sekolah membuka menu \textbf{Arsip Kelas} di panel \textbf{Sistem \& Pengaturan}. Fase 2: Beliau membaca peringatan merah besar yang berbunyi \textit{``Peringatan: Aksi Tidak Dapat Dibatalkan. Mengarsipkan kelas akan menghapus secara permanen seluruh data siswa...''}, kemudian memilih \textbf{12 MIPA 1} dari \textit{dropdown} kelas. Fase 3: Beliau mencentang kotak persetujuan yang bertuliskan \textit{``Saya mengerti risikonya...''}, lalu mengklik tombol merah \textbf{Arsipkan \& Hapus Data Sekarang}. Fase 4: Sistem mengeksekusi proses secara atomik (dalam satu transaksi \textit{database}): mengekstrak riwayat kelas 12 MIPA 1, memasukkannya ke dalam berkas \textit{ZIP}, lalu menghapus seluruh data siswa dan log absensi bersangkutan dari \textit{database} utama.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{placeholder_archive_danger_zone.png}
-    \caption{Zona Bahaya (Danger Zone) pada halaman Arsip Kelas yang mewajibkan konfirmasi ganda (Double-opt-in).}
+    \caption{Zona Peringatan (Danger Zone) pada halaman Arsip Kelas, dengan kotak persetujuan wajib dicentang sebelum eksekusi.}
     \label{figure:7.1}
 \end{figure}
 
 \section{Panduan Penggunaan (Step-by-Step)}
 
-\subsection{Melaksanakan Prosedur Arsip Kelas (Archive Protocol)}
+\subsection{Melaksanakan Prosedur Arsip Kelas}
 \begin{enumerate}
-    \item Pastikan rapor semester/tahunan telah selesai dibagikan, karena prosedur ini akan \textbf{MENGHAPUS DATA UTAMA}.
-    \item Pada panel menu, akses wilayah \textbf{Maintenance} lalu klik opsi sekunder \textbf{Arsip Kelas}.
-    \item Tampilan antarmuka ini dipisahkan menjadi "Panel Aksi Baru" dan "Tabel Arsip Terdahulu". Berfokuslah pada Panel Aksi (Arsipkan Data Kelas).
-    \item Pilih kelas sasaran pada peranti *dropdown* \textbf{Kelas}.
-    \item Centang kotak berbunyi \textbf{Saya yakin ingin mengarsipkan dan MENGHAPUS data siswa dari kelas ini beserta seluruh absensinya}. Tanpa centangan ini (\textit{checkbox}), prosedur terkunci demi pengamanan lapis pertama.
-    \item Klik tombol warna merah pekat \textbf{Arsipkan \& Hapus Data Kelas}.
-    \item Akan timbul peringatan (\textit{alert}) dari *browser*. Konfirmasi kembali bahwa keputusan Anda telah valid (\textit{OK}).
-    \item Data siswa dan rekam absensi pada kelas terilih seketika lenyap dari tabel utama \textit{database}.
+    \item \textbf{PRASYARAT}: Pastikan seluruh rapor semester/tahunan telah selesai dibagikan dan semua data sudah diverifikasi sebelum menjalankan prosedur ini, karena aksi ini \textbf{tidak dapat dibatalkan}.
+    \item Pada panel navigasi kiri (kelompok \textbf{Sistem \& Pengaturan}), klik menu \textbf{Arsip Kelas}.
+    \item Baca dengan seksama panel peringatan berwarna merah di bagian atas halaman yang menjelaskan konsekuensi dari aksi ini.
+    \item Di dalam panel formulir, temukan \textit{dropdown} berlabel \textbf{Pilih Kelas yang Lulus / Akan Diarsipkan} dan pilih kelas sasaran (contoh: \textit{12 MIPA 1}).
+    \item Centang kotak persetujuan yang berbunyi: \textbf{``Saya mengerti risikonya. Saya yakin ingin mengarsipkan dan menghapus seluruh data siswa di kelas ini secara permanen dari database.''} Tanpa mencentang kotak ini, tombol eksekusi tidak akan dapat diklik karena validasi HTML5 mewajibkan \textit{checkbox required}.
+    \item Klik tombol merah \textbf{Arsipkan \& Hapus Data Sekarang}. Halaman akan memproses permintaan dan menghasilkan entri arsip baru.
+    \item Data siswa dan log absensi kelas tersebut akan dihapus dari tabel utama \textit{database} secara permanen.
 \end{enumerate}
 
-\subsection{Mengambil Kembali Arsip yang Terkompresi (Download Artifact)}
+\subsection{Mengunduh Berkas Arsip Sebelumnya}
 \begin{enumerate}
-    \item Pada halaman yang sama (\textbf{Arsip Kelas}), alihkan pandangan ke bagian bawah halaman pada modul tabel daftar arsip.
-    \item Telusuri baris yang memuat catatan nama arsip dengan keterangan kelas yang diretas sebelumnya.
-    \item Klik tautan warna biru bertuliskan \textbf{Download Excel} jika Anda butuh \textit{spreadsheet} kilat, atau tautan \textbf{Download ZIP} jika Anda butuh dokumen mentah seluruh data pendamping (termasuk foto, surat sakit/izin lawas, dsb).
+    \item Pada halaman \textbf{Arsip Kelas}, gulir ke bawah ke bagian \textbf{Daftar Arsip Sebelumnya}.
+    \item Tabel menampilkan kolom: \textbf{Nama Kelas}, \textbf{Tahun Ajaran}, \textbf{Tanggal Dibuat}, dan \textbf{Aksi}.
+    \item Temukan baris arsip yang dimaksud. Di kolom \textbf{Aksi}, terdapat tiga tombol:
+    \begin{itemize}
+        \item Tombol hijau \textbf{Unduh Excel Absen}: Mengunduh rekap seluruh log absensi kelas tersebut dalam format \textit{spreadsheet} Excel (\texttt{.xlsx}).
+        \item Tombol biru \textbf{Unduh Semua (.zip)}: Mengunduh paket lengkap berisi berkas Excel beserta lampiran foto izin/sakit dalam satu berkas terkompresi (\texttt{.zip}).
+        \item Tombol merah \textbf{Hapus}: Menghapus entri rekaman arsip dari \textit{database}. Sistem akan menampilkan dialog konfirmasi browser sebelum mengeksekusi.
+    \end{itemize}
 \end{enumerate}
 
 \section{Penanganan Masalah (Edge Cases)}
 \begin{itemize}
-    \item \textbf{Celah Path Traversal}: Beberapa aplikasi abal-abal rentan terhadap penyisipan serangan *Path Traversal* ketika *mengunduh file* arsip (meretas \textit{path} untuk mengunduh `.env` atau *root system*). EduConnect mengunci fungsi `ArchiveController` agar hanya \textit{file} dengan direktori spesifik `/archives/` dan ber-ID valid yang lolos unduh.
-    \item \textbf{Timeout Eksekusi ZIP}: Apabila kelas tersebut memilki puluhan ribu rekam absensi beserta foto lampiran izin yang memakan ukuran \textit{Gigabyte}, *server PHP* mungkin akan pingsan (*Time-out limits* 30/60 detik) sebelum berhasil men-ZIP. Disarankan mengeksekusi ini dari sisi \textit{Command Line} (*Artisan Console*) jika ruang tampung datanya tergolong level raksasa.
+    \item \textbf{Proses Arsip Gagal di Tengah Jalan}: Seluruh operasi arsip (pembuatan Excel, penyalinan foto, pembuatan ZIP, penghapusan \textit{database}) dibungkus dalam satu transaksi \textit{database} atomik dengan mekanisme penguncian (\textit{pessimistic locking}). Jika salah satu langkah gagal, seluruh transaksi akan di-\textit{rollback} secara otomatis, sehingga data tidak akan terhapus sebagian. Pesan error akan ditampilkan di bagian atas halaman.
+    \item \textbf{Timeout Eksekusi ZIP}: Apabila kelas memiliki ribuan log absensi beserta foto lampiran izin yang berukuran besar, \textit{server PHP} mungkin akan mencapai batas waktu eksekusi (timeout 30-60 detik) sebelum berhasil mengkompresi berkas \textit{ZIP}. Disarankan mengeksekusi prosedur arsip menggunakan perintah \textit{Artisan Console} melalui \textit{SSH} jika volume data sangat besar.
+    \item \textbf{Tombol Unduh Menghasilkan Error 403}: Sistem \textit{ArchiveController} membatasi akses unduhan hanya pada berkas yang berada dalam direktori \texttt{/archives/} dan memiliki ID valid yang terdaftar di \textit{database}. Pastikan ID arsip yang diminta valid dan berkas fisiknya masih ada di \textit{storage server}.
 \end{itemize}

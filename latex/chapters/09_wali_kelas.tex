@@ -1,0 +1,45 @@
+\chapter{Modul Wali Kelas (Homeroom Teacher)}
+
+Modul Wali Kelas adalah antarmuka khusus yang dirancang untuk memenuhi kebutuhan sehari-hari seorang Wali Kelas (\textit{Teacher}) tanpa membebankan mereka dengan kompleksitas panel administrasi penuh. Modul ini terdiri dari satu halaman utama: \textbf{Rekap Kehadiran Hari Ini}, sebuah dasbor cepat yang menampilkan kondisi kehadiran kelas asuhan secara \textit{real-time} pada hari yang sedang berjalan.
+
+\section{Konsep Dasar \& Matriks Peran}
+\begin{itemize}
+    \item \textbf{Wali Kelas (\textit{Teacher})}: Satu-satunya peran yang memiliki akses ke menu \textbf{Menu Wali Kelas} di kelompok navigasi \textit{Wali Kelas}. Wali Kelas hanya dapat melihat data kelas yang secara resmi didelegasikan kepada mereka di pengaturan \textit{Master Data} kelas.
+    \item \textbf{Admin / Super Admin}: Juga dapat mengakses halaman ini jika diperlukan, namun menu ini tidak tertera di panel navigasi mereka secara bawaan.
+\end{itemize}
+
+\section{Skenario Dunia Nyata \& Alur Kerja}
+
+Ibu Sari, Wali Kelas 11 IPA 3, membuka EduConnect di \textit{smartphone} pada jam 08:30 pagi. Fase 1: Ia mengklik menu \textbf{Menu Wali Kelas} di panel navigasi kiri. Halaman \textbf{Rekap Kehadiran Hari Ini} terbuka dan secara otomatis memilih kelas asuhan beliau (11 IPA 3) karena itu satu-satunya kelas yang didelegasikan. Fase 2: Ibu Sari melihat daftar siswa beserta status kehadiran mereka hari ini. Ia memfilter tampilannya hanya pada siswa berstatus \textbf{Alpha} untuk mengetahui siapa yang belum hadir dan belum ada keterangan. Fase 3: Ibu Sari menggunakan informasi ini untuk menghubungi orang tua siswa yang bersangkutan.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{placeholder_homeroom_today.png}
+    \caption{Halaman Rekap Kehadiran Hari Ini untuk Wali Kelas, dengan filter kelas dan status serta komponen \textit{live} Livewire.}
+    \label{figure:9.1}
+\end{figure}
+
+\section{Panduan Penggunaan (Step-by-Step)}
+
+\subsection{Mengakses Rekap Kehadiran Hari Ini}
+\begin{enumerate}
+    \item Setelah \textit{login} dengan akun Wali Kelas (\textit{Teacher}), cari kelompok menu \textbf{Wali Kelas} di bagian bawah panel navigasi kiri.
+    \item Klik menu \textbf{Menu Wali Kelas}. Sistem akan membuka halaman \textbf{Rekap Kehadiran Hari Ini} di URL \texttt{/wali-kelas/rekap-hari-ini}.
+    \item Jika Anda belum ditetapkan sebagai wali kelas aktif untuk kelas manapun, halaman akan menampilkan notifikasi kuning yang berbunyi \textit{``Anda belum ditetapkan sebagai wali kelas aktif.''} Hubungi Admin untuk memperbarui data kelas.
+\end{enumerate}
+
+\subsection{Memantau dan Menyaring Status Kehadiran}
+\begin{enumerate}
+    \item Pada halaman \textbf{Rekap Kehadiran Hari Ini}, perhatikan baris filter di bagian atas.
+    \item \textit{Dropdown} pertama menampilkan daftar kelas asuhan Anda. Jika Anda hanya menjadi Wali Kelas untuk satu kelas, kelas tersebut sudah terpilih secara otomatis. Mengubah pilihan \textit{dropdown} ini akan langsung memuat ulang data tanpa perlu menekan tombol Filter.
+    \item \textit{Dropdown} kedua adalah filter \textbf{Status}. Pilih salah satu dari: \textbf{Semua Status}, \textbf{Hadir}, \textbf{Terlambat}, \textbf{Izin}, \textbf{Sakit}, atau \textbf{Alpha}. Mengubah pilihan ini juga akan memuat ulang data secara otomatis.
+    \item Pojok kanan baris filter menampilkan informasi tanggal saat ini yang tidak dapat diubah, karena halaman ini selalu menampilkan data \textbf{hari yang sedang berjalan} saja.
+    \item Tabel kehadiran di bawahnya ditenagai oleh komponen \textit{Livewire} (\texttt{homeroom-bulk-attendance}) yang memperbarui data secara \textit{real-time}.
+\end{enumerate}
+
+\section{Penanganan Masalah (Edge Cases)}
+\begin{itemize}
+    \item \textbf{Dropdown Kelas Terisi namun Tabel Kosong}: Pastikan kelas yang dipilih memiliki siswa aktif yang terdaftar. Kelas baru yang belum diisi siswa akan menghasilkan tabel kosong.
+    \item \textbf{Data Tidak Terbaru / Tidak Sinkron}: Komponen \textit{Livewire} bergantung pada sesi aktif dan koneksi \textit{server}. Jika data tampak tidak sinkron, coba \textit{refresh} halaman secara manual menggunakan tombol \textit{refresh} di \textit{browser}.
+    \item \textbf{Tidak Ada Menu Wali Kelas di Panel Navigasi}: Pastikan akun Anda telah ditetapkan dengan peran \textbf{Teacher} (\textit{role = teacher}) oleh Super Admin melalui menu \textbf{Guru \& Staf}. Akun dengan peran \textit{Admin} atau \textit{Staff} tidak menampilkan menu Wali Kelas meskipun mungkin bisa mengakses URL-nya secara langsung.
+\end{itemize}

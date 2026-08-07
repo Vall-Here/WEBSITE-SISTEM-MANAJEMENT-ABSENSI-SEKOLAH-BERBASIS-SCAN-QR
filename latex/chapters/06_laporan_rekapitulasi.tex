@@ -1,44 +1,72 @@
 \chapter{Modul Laporan \& Rekapitulasi}
 
-Fungsi administrasi sebuah aplikasi baru dinyatakan selesai apabila aplikasi tersebut mampu menelurkan laporan yang terstruktur dan mudah dianalisis. Modul ini menjadi jembatan antara rekam jejak digital harian dengan berkas rekapitulasi akademis, baik dalam bentuk Harian, Bulanan, maupun Statistik Personal.
+Modul Laporan adalah ujung dari alur data EduConnect yang mengubah rekaman absensi mentah menjadi laporan terstruktur yang siap digunakan untuk keperluan administrasi akademis. Modul ini terbagi menjadi tiga sub-halaman: \textbf{Laporan Harian} (rekap per tanggal), \textbf{Laporan Bulanan} (rekap agregat per siswa per bulan, dengan ekspor Excel/Dapodik/PDF), dan \textbf{Laporan Per Siswa} (riwayat individu dengan tampilan kalender visual).
 
 \section{Konsep Dasar \& Matriks Peran}
 \begin{itemize}
-    \item \textbf{Admin \& Super Admin}: Diberikan kebebasan mutlak untuk melihat, menyaring (*filter*), dan mengekspor seluruh rekaman kehadiran dari semua jenjang dan semua kelas tanpa batasan.
-    \item \textbf{Wali Kelas (\textit{Teacher})}: Menganut prinsip privasi data; laporan terkunci dan secara mekanis hanya akan menghasilkan keluaran (*output*) untuk kelas yang didelegasikan padanya. Opsi "Semua Kelas" pada \textit{dropdown} akan dihapus atau dimandulkan oleh \textit{Controller}.
+    \item \textbf{Admin \& Super Admin}: Bebas melihat, menyaring, dan mengekspor seluruh rekaman kehadiran dari semua jenjang dan semua kelas tanpa batasan. Pilihan \textbf{Semua Kelas} pada \textit{dropdown} tersedia secara penuh.
+    \item \textbf{Wali Kelas (\textit{Teacher})}: Menganut prinsip privasi data. Laporan terkunci secara mekanis dan hanya menghasilkan keluaran untuk kelas yang didelegasikan padanya. Opsi ``Semua Kelas'' pada \textit{dropdown} tidak akan menghasilkan data kelas lain.
 \end{itemize}
 
 \section{Skenario Dunia Nyata \& Alur Kerja}
-Di minggu terakhir tiap akhir bulan, Staf Bimbingan Konseling (BK) melakukan sidak rekapitulasi. Fase 1: Staf BK selaku Admin masuk ke menu "Laporan Bulanan", memilih rentang waktu bulan "November" tahun "2026", lalu mengeklik opsi ekspor data (Excel). Fase 2: Beliau melakukan identifikasi. Siswa C (Kelas 11 IPS) ternyata bolos (Alpha) 5 kali di bulan November. Fase 3: Staf BK membuka sub-menu "Laporan Siswa", mencari nama Siswa C, mengecek detail tanggal bolosnya, dan langsung mengeklik tombol cetak "Surat Panggilan (SP) Orang Tua" berupa file PDF resmi bersatu logo sekolah untuk dikirim hari itu juga.
+
+Di akhir bulan November, Staf Bimbingan Konseling (BK) selaku Admin membuka EduConnect untuk sidak rekapitulasi. Fase 1: Staf BK masuk ke menu \textbf{Laporan Bulanan}, mengisi tahun \textit{2026} dan bulan \textit{11} pada filter, memilih kelas \textit{11 IPS 2}, lalu mengklik \textbf{Filter}. Tabel menampilkan daftar seluruh siswa kelas tersebut beserta kolom H (Hadir), T (Terlambat), I (Izin), S (Sakit), A (Alpha), dan persentase kehadiran. Fase 2: Staf BK menemukan Siswa C memiliki kolom A bernilai 5 dan persentase merah (di bawah 75\%). Fase 3: Ia berpindah ke sub-menu \textbf{Laporan Per Siswa}, mencari nama Siswa C, mengatur rentang tanggal bulan November, mengklik \textbf{Filter}, lalu mengklik tombol \textbf{Export Kartu Siswa (PDF)} untuk mencetak Surat Panggilan.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{placeholder_monthly_report_filter.png}
-    \caption{Antarmuka Laporan Bulanan dengan komponen penyaring bertingkat dan opsi Export Excel.}
+    \caption{Halaman Laporan Bulanan dengan filter Tahun, Bulan, Kelas, dan tiga tombol ekspor (Excel, Dapodik, PDF).}
     \label{figure:6.1}
 \end{figure}
 
 \section{Panduan Penggunaan (Step-by-Step)}
 
-\subsection{Menarik Rekapitulasi Laporan Bulanan (Excel)}
+\subsection{Menarik Laporan Harian}
 \begin{enumerate}
-    \item Dari Dasbor, akses menu utama sisi kiri, cari \textbf{Laporan} dan klik sub-menu \textbf{Laporan Bulanan}.
-    \item Anda akan melihat tiga filter utama di area abu-abu atas layar.
-    \item Atur parameter \textbf{Tahun} (contoh: 2026) dan \textbf{Bulan} (contoh: November).
-    \item Atur parameter penargetan \textbf{Kelas} (contoh: Kelas 11 IPS). (Catatan: Jika Anda *login* sebagai Wali Kelas, opsi kelas selain asuhan Anda tidak akan tersedia).
-    \item Klik tombol biru solid bertuliskan \textbf{Filter}. Tabel rekap akan muncul di bawahnya, menderetkan daftar nama siswa beserta kalkulasi otomatis atas status (Hadir, Sakit, Izin, Terlambat, Alpha).
-    \item Di pojok kanan atas tabel, klik tautan \textbf{Export Excel} berwarna hijau untuk mengunduh rekap dalam \textit{spreadsheet}.
+    \item Pada panel navigasi kiri, klik menu \textbf{Laporan Absensi}. Anda akan diarahkan ke sub-menu \textbf{Laporan Harian}.
+    \item Atur filter \textbf{Tanggal} yang diinginkan menggunakan \textit{date picker}.
+    \item Pilih \textbf{Kelas} dari \textit{dropdown} jika ingin mempersempit data hanya untuk satu kelas.
+    \item Klik tombol \textbf{Filter} untuk menampilkan hasilnya. Tabel menampilkan rekap harian berisi nama siswa, NIS, kelas, jam masuk, jam keluar, status, dan metode absen.
+    \item Gunakan tautan \textbf{Export Excel} (warna hijau) atau \textbf{Export PDF Harian} (warna ungu) untuk mengunduh laporan.
 \end{enumerate}
 
-\subsection{Meninjau Rekam Jejak Individu (Student Report)}
+\subsection{Menarik Laporan Bulanan (Excel / Dapodik / PDF)}
 \begin{enumerate}
-    \item Berpindah ke menu \textbf{Laporan Siswa}.
-    \item Ketik nomor NIS atau penggalan nama siswa di kolom teks pencarian, sistem (\textit{Autocomplete}) akan menyuguhkan kecocokan secara interaktif.
-    \item Pilih nama siswa yang dimaksud, tentukan \textbf{Bulan} dan \textbf{Tahun}, lalu tekan \textbf{Lihat Laporan}.
-    \item Halaman akan menampilkan riwayat kehadiran spesifik per tanggal, lengkap dengan waktu persis \textit{check-in} siswa tersebut pada bulan terkait.
+    \item Pada panel navigasi kiri, klik sub-menu \textbf{Laporan Absensi}, lalu klik tab \textbf{Laporan Bulanan}, atau langsung akses URL \texttt{/admin/reports/monthly}.
+    \item Pada baris filter di atas tabel, isi isian angka \textbf{Tahun} (contoh: \texttt{2026}).
+    \item Pilih \textbf{Bulan} dari \textit{dropdown} angka (1 sampai 12).
+    \item Pilih \textbf{Kelas} dari \textit{dropdown}. (Catatan: Jika Anda \textit{login} sebagai Wali Kelas, hanya kelas asuhan Anda yang tersedia).
+    \item Klik tombol \textbf{Filter} (warna hijau \textit{emerald}). Tabel akan muncul di bawah baris filter, menampilkan kolom: \textbf{NIS}, \textbf{Nama}, \textbf{Kelas}, \textbf{H} (Hadir), \textbf{T} (Terlambat), \textbf{I} (Izin), \textbf{S} (Sakit), \textbf{A} (Alpha), dan \textbf{\%} (Persentase Kehadiran). Persentase di bawah 75\% ditandai merah, di atas 75\% ditandai hijau.
+    \item Di atas tabel, terdapat tiga tombol ekspor:
+    \begin{itemize}
+        \item Klik tombol \textbf{Export Excel} (bingkai \textit{emerald}) untuk mengunduh rekap dalam format \textit{spreadsheet}.
+        \item Klik tombol \textbf{Export Dapodik} (bingkai \textit{teal}, hanya muncul jika kelas dipilih) untuk mengunduh rekap dalam format khusus pelaporan Dapodik Kemendikbud.
+        \item Klik tombol \textbf{Export PDF Bulanan} (bingkai \textit{indigo}) untuk mengunduh laporan dalam format PDF siap cetak.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Meninjau Riwayat Individu (Laporan Per Siswa)}
+\begin{enumerate}
+    \item Akses sub-menu \textbf{Laporan Absensi} $\rightarrow$ \textbf{Laporan Per Siswa}, atau langsung ke URL \texttt{/admin/reports/student}.
+    \item Pada baris filter, pilih nama siswa dari \textit{dropdown} \textbf{Pilih Siswa} (berisi nama dan NIS).
+    \item Isi \textbf{Tanggal Mulai} dan \textbf{Tanggal Selesai} pada dua isian \textit{date picker}.
+    \item Klik tombol \textbf{Filter} (warna ungu \textit{violet}). Halaman akan menampilkan:
+    \begin{itemize}
+        \item Kartu identitas siswa (Nama, NIS, Kelas).
+        \item Empat kartu ringkasan: \textbf{Hadir} (hijau), \textbf{Terlambat} (kuning), \textbf{Izin/Sakit} (biru), \textbf{Alpha} (merah).
+        \item \textbf{Kalender Status}: Grid visual yang menampilkan setiap hari dalam rentang tanggal, masing-masing diwarnai sesuai statusnya.
+        \item Tabel detail harian berkolom: \textbf{Tanggal}, \textbf{Status}, \textbf{Masuk}, \textbf{Pulang}, \textbf{Metode}, dan \textbf{Catatan}.
+    \end{itemize}
+    \item Di atas tabel, terdapat dua tombol ekspor:
+    \begin{itemize}
+        \item \textbf{Export Daftar Siswa (Excel)}: Mengunduh data seluruh siswa aktif di sekolah dalam format Excel.
+        \item \textbf{Export Kartu Siswa (PDF)}: Mengunduh kartu identitas berisi QR Code siswa yang sedang dipilih dalam format PDF.
+    \end{itemize}
 \end{enumerate}
 
 \section{Penanganan Masalah (Edge Cases)}
 \begin{itemize}
-    \item \textbf{Celah Ekspor Memori (Memory Exhaustion)}: Jangan pernah mengosongkan filter \textbf{Kelas} lalu mencoba mengunduh Excel Laporan Bulanan jika sekolah memiliki ribuan murid. Proses render ini sangat berat bagi *server* (\textit{Brute-force Query}). Selalu filter penarikan laporan secara bertahap (per kelas) untuk menjaga stabilitas infrastruktur \textit{server}.
+    \item \textbf{Tabel Laporan Bulanan Kosong Setelah Filter}: Pastikan parameter Tahun dan Bulan yang dimasukkan sesuai dengan rentang data yang tersedia. Jika kelas baru dibuat di pertengahan bulan, data sebelum tanggal pembuatan kelas tidak akan tersedia.
+    \item \textbf{Risiko Beban Server Saat Ekspor}: Jangan mengosongkan filter \textbf{Kelas} lalu langsung mengunduh Excel Laporan Bulanan jika sekolah memiliki ratusan kelas atau ribuan murid aktif. Lakukan ekspor secara bertahap (per kelas) untuk menjaga stabilitas \textit{server}.
+    \item \textbf{Tombol Export Dapodik Tidak Muncul}: Tombol ini dirancang hanya muncul saat filter Kelas sudah dipilih (bukan ``Semua Kelas''), karena format Dapodik memerlukan data satu kelas spesifik.
 \end{itemize}

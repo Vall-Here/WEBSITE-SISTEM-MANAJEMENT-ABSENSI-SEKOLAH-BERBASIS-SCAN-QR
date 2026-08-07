@@ -556,11 +556,11 @@
         const docContent = document.getElementById('docContent');
         
         const menuItems = [
-            { file: 'absensi-qr.md', label: '📷 Absensi QR Code' },
-            { file: 'portal-orang-tua.md', label: '📱 Portal Orang Tua' },
-            { file: 'auto-alpha-holidays.md', label: '🤖 Auto-Alpha & Libur' },
-            { file: 'rekap-laporan.md', label: '📊 Rekap & Laporan' },
-            { file: 'arsip-kelas.md', label: '📦 Arsip Kelas & Data' }
+            { file: 'absensi-qr.md', label: 'Absensi QR Code' },
+            { file: 'portal-orang-tua.md', label: 'Portal Orang Tua' },
+            { file: 'auto-alpha-holidays.md', label: 'Auto-Alpha & Libur' },
+            { file: 'rekap-laporan.md', label: 'Rekap & Laporan' },
+            { file: 'arsip-kelas.md', label: 'Arsip Kelas & Data' }
         ];
         
         function renderDoc(fileId) {
@@ -598,9 +598,7 @@
             let blob = new Blob([rawMd], { type: 'text/markdown' });
             let url = URL.createObjectURL(blob);
             html += `<div style="text-align: center; width: 100%; margin-top: 2rem;">
-                        <a href="${url}" download="${fileId}" class="btn-download">
-                            Download Dokumen Panduan Lengkap (.md)
-                        </a>
+                        <a href="${url}" download="${fileId}" class="btn-download">Download Dokumen Panduan Lengkap (.md)</a>
                      </div>`;
             
             docContent.innerHTML = html;

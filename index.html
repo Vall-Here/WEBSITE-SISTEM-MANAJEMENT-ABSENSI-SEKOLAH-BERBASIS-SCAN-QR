@@ -232,6 +232,34 @@
             .hero h1 { font-size: 2.5rem; } .nav-links { display: none; }
             .pricing-card.popular { transform: none; } .pricing-card.popular:hover { transform: translateY(-5px); }
         }
+
+        /* Video Section */
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 800px; margin: 0 auto; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border: 1px solid var(--border-color); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted); }
+        
+        /* Docs Section */
+        .docs-container { display: flex; gap: 2rem; max-width: 1100px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 1px solid var(--border-color); overflow: hidden; min-height: 600px; text-align: left; }
+        .docs-sidebar { width: 300px; background: #f8fafc; border-right: 1px solid var(--border-color); padding: 2rem 1.5rem; flex-shrink: 0; }
+        .docs-sidebar h4 { font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.05em; text-align: left; }
+        .doc-menu { list-style: none; padding: 0; margin: 0; }
+        .doc-menu li { margin-bottom: 0.5rem; }
+        .doc-menu button { width: 100%; text-align: left; padding: 0.85rem 1rem; background: transparent; border: 1px solid transparent; border-radius: 8px; cursor: pointer; font-family: inherit; font-size: 0.95rem; font-weight: 500; color: var(--text-main); transition: all 0.2s; }
+        .doc-menu button:hover { background: #eef2ff; color: var(--primary-hover); }
+        .doc-menu button.active { background: white; border-color: var(--primary); color: var(--primary); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        
+        .docs-content { flex-grow: 1; padding: 3rem; overflow-y: auto; max-height: 800px; display: flex; flex-direction: column; align-items: center; }
+        .docs-content h1, .docs-content h2, .docs-content h3 { color: var(--text-main); text-align: center; margin-bottom: 1rem; }
+        .docs-content p { margin-bottom: 1rem; text-align: center; color: var(--text-muted); }
+        .docs-content .mermaid { margin: 2rem 0; width: 100%; display: flex; justify-content: center; }
+        .btn-download { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--primary); color: white; text-decoration: none; border-radius: 999px; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3); margin-top: 2rem; }
+        .btn-download:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4); color: white; }
+        
+        @media (max-width: 768px) {
+            .docs-container { flex-direction: column; }
+            .docs-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .docs-content { padding: 1.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -260,7 +288,7 @@
             </div>
         </div>
         <div class="hero-image-wrapper">
-            <img src="assets/images/hero-dashboard.png" alt="EduConnect Dashboard Utama" class="hero-image" loading="lazy" onerror="this.src='https://placehold.co/1200x600/e2e8f0/94a3b8?text=Image+Not+Found+(hero-dashboard.png)'">
+            <img src="img/dashboard.png" alt="EduConnect Dashboard Utama" class="hero-image" loading="lazy" onerror="this.src='https://placehold.co/1200x600/e2e8f0/94a3b8?text=Image+Not+Found+(hero-dashboard.png)'">
         </div>
     </header>
 
@@ -325,29 +353,102 @@
         <p style="text-align: center; margin-bottom: 2rem; font-size: 1.15rem;">Klik gambar untuk memperbesar resolusi layar.</p>
         
         <div class="gallery-container">
-            <div class="gallery-item" onclick="openLightbox('assets/images/hero-dashboard.png')">
-                <img src="assets/images/hero-dashboard.png" alt="Dashboard Interaktif" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=hero-dashboard.png'">
-                <div class="gallery-caption">Dashboard Utama EduConnect</div>
+            <div class="gallery-item" onclick="openLightbox('img/dashboard.png')">
+                <img src="img/dashboard.png" alt="Dashboard Utama EduConnect" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Dashboard Analytics Real-Time</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('assets/images/qr-scan.png')">
-                <img src="assets/images/qr-scan.png" alt="QR Scan" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=qr-scan.png'">
-                <div class="gallery-caption">Scanner QR Code Otomatis</div>
+            <div class="gallery-item" onclick="openLightbox('img/laporan bulanan.png')">
+                <img src="img/laporan bulanan.png" alt="Rekap Laporan Bulanan" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Laporan Bulanan Absensi</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('assets/images/parent-portal.png')">
-                <img src="assets/images/parent-portal.png" alt="Portal PWA" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=parent-portal.png'">
-                <div class="gallery-caption">Akses Portal PWA Orang Tua</div>
+            <div class="gallery-item" onclick="openLightbox('img/laporan harian.png')">
+                <img src="img/laporan harian.png" alt="Rekap Laporan Harian" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Laporan Harian Absensi</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('assets/images/auto-alpha-cron.png')">
-                <img src="assets/images/auto-alpha-cron.png" alt="Auto Alpha" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=auto-alpha-cron.png'">
-                <div class="gallery-caption">Pengaturan Hari Libur & Auto-Alpha</div>
+            <div class="gallery-item" onclick="openLightbox('img/scanner.png')">
+                <img src="img/scanner.png" alt="Mesin QR Scanner Presensi" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Scanner Presensi Otomatis</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('assets/images/class-archive.png')">
-                <img src="assets/images/class-archive.png" alt="Arsip Kelas" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=class-archive.png'">
-                <div class="gallery-caption">Digital Archiving & Pembersihan Data</div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-academic-years-2026-08-08-01_18_26.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-academic-years-2026-08-08-01_18_26.png" alt="Manajemen Academic Years" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Academic Years</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('assets/images/report-dashboard.png')">
-                <img src="assets/images/report-dashboard.png" alt="Report Dashboard" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=report-dashboard.png'">
-                <div class="gallery-caption">Generator Laporan Akademik</div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-classes-2026-08-08-01_16_23.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-classes-2026-08-08-01_16_23.png" alt="Manajemen Classes" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Classes</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-holidays-2026-08-08-01_19_27.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-holidays-2026-08-08-01_19_27.png" alt="Manajemen Holidays" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Holidays</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-leaves-2026-08-08-01_17_40.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-leaves-2026-08-08-01_17_40.png" alt="Manajemen Leaves" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Leaves</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-maintenance-archive-2026-08-08-01_19_33.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-maintenance-archive-2026-08-08-01_19_33.png" alt="Manajemen Maintenance Archive" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Maintenance Archive</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-reports-2026-08-08-01_17_46.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-reports-2026-08-08-01_17_46.png" alt="Manajemen Reports" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Reports</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-school-settings-2026-08-08-01_19_00.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-school-settings-2026-08-08-01_19_00.png" alt="Manajemen School Settings" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul School Settings</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-settings-attendance-2026-08-08-01_19_08.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-settings-attendance-2026-08-08-01_19_08.png" alt="Manajemen Settings Attendance" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Settings Attendance</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-students-2026-08-08-01_16_07.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-students-2026-08-08-01_16_07.png" alt="Manajemen Students" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Students</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-students-839-2026-08-08-01_19_43.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-students-839-2026-08-08-01_19_43.png" alt="Manajemen Students 839" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Students 839</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-students-assign-2026-08-08-01_16_14.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-students-assign-2026-08-08-01_16_14.png" alt="Manajemen Students Assign" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Students Assign</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('img/screencapture-127-0-0-1-8000-admin-teachers-2026-08-08-01_18_21.png')">
+                <img src="img/screencapture-127-0-0-1-8000-admin-teachers-2026-08-08-01_18_21.png" alt="Manajemen Teachers" loading="lazy" onerror="this.src='https://placehold.co/800x600/e2e8f0/94a3b8?text=Image+Not+Found'">
+                <div class="gallery-caption">Modul Teachers</div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="demo-video" style="background: #f8fafc;">
+        <h2>Video Demonstrasi</h2>
+        <p style="text-align: center; margin-bottom: 2rem; font-size: 1.15rem;">Lihat bagaimana ekosistem EduConnect bekerja secara langsung.</p>
+        
+        <div class="video-container">
+            <!-- Ganti src YouTube di bawah ini dengan link video Anda -->
+            <div class="video-placeholder">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🎥</div>
+                <p>Video demonstrasi belum tersedia. Sisipkan embed YouTube di source code.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="panduan-sistem" style="background: white;">
+        <h2>Buku Panduan & Alur Kerja</h2>
+        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.15rem; max-width: 800px; margin-left: auto; margin-right: auto;">Pelajari secara komprehensif bagaimana fitur-fitur unggulan EduConnect mengotomatiskan presensi sekolah Anda.</p>
+        
+        <div class="docs-container">
+            <div class="docs-sidebar">
+                <h4>Modul Panduan</h4>
+                <ul class="doc-menu" id="docMenu">
+                    <!-- Javascript will populate this -->
+                </ul>
+            </div>
+            <div class="docs-content" id="docContent">
+                <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted);">
+                    <p>Memuat panduan...</p>
+                </div>
             </div>
         </div>
     </section>
@@ -441,5 +542,107 @@
             });
         });
     </script>
+
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Documentation Viewer Logic -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: false, theme: 'base', themeVariables: { primaryColor: '#eef2ff', primaryBorderColor: '#6366f1', lineColor: '#475569', fontFamily: 'Outfit' } });
+        
+        const docData = {"absensi-qr.md": "---\nlayout: default\n---\n\n# EduCONNECT System\n\n## \ud83d\udcf7 Absensi Berbasis QR Code & Scanner Otomatis\n\nSelamat tinggal absensi manual pemanggil nama satu per satu! Dengan teknologi QR Code EduConnect, proses presensi menjadi jauh lebih kilat dan terukur keakuratannya.\n\n![QR Scanner Action](../assets/images/qr-scanner.png)\n_(Gambar: Tampilan antarmuka Scanner QR di gerbang sekolah ketika siswa memindai kartu)_\n\n## Bagaimana Cara Kerjanya?\n\nSistem EduConnect bekerja dalam 3 langkah sederhana yang revolusioner:\n\n1. **Setiap Siswa Memiliki Kode Unik**  \n   Ketika Admin mendaftarkan siswa ke dalam sistem, secara otomatis EduConnect akan membuatkan sebuah tiket/kartu yang memuat **QR Code** unik untuk masing-masing siswa. QR Code ini bisa dicetak di balik ID Card (kartu OSIS) siswa.\n2. **Datang, Tunjukkan, Selesai**  \n   Di pagi hari, siswa hanya perlu memposisikan ID Card mereka ke hadapan perangkat (Kamera Webcam / Scanner yang terhubung ke sistem). Dalam pecahan detik, sistem akan membaca dan memverifikasi wajah siswa atau kodenya.\n3. **Konfirmasi Real-Time & Audio**  \n   Sistem akan merespon pemindaian dengan antarmuka yang sangat jelas di layar monitor\u2014menampilkan foto siswa dan tanda ceklis hijau. Tidak hanya itu, notifikasi suara akan memvalidasi bahwa \"Siswa A berhasil Check-In\", memastikan proses absensi dilakukan secara sah tanpa rekayasa.\n\n## Mengapa Ini Luar Biasa Bagi Sekolah Anda?\n\n- **Anti Antre Panjang:** Kapasitas pindai yang instan dapat memangkas waktu masuk kelas untuk sekolah dengan jumlah populasi ribuan siswa.\n- **Teknologi Broadcasting (Reverb):** Menggunakan sokongan _WebSockets_ Laravel Reverb yang modern, seluruh log masuk siswa akan langsung terlihat di monitor ruangan Kepala Sekolah / Admin seketika saat kartu siswa berhasil memindai gerbang\u2014tanpa perlu me-_refresh_ halaman komputer.\n\n---\n\n[\u2b05\ufe0f Kembali ke Halaman Utama](../index.html)\n", "arsip-kelas.md": "---\nlayout: default\n---\n\n# \ud83d\udcc2 Pengarsipan Kelas (Digital Archiving)\n\nMenyimpan data catatan absensi dari ratusan hingga ribuan siswa setiap hari akan mengakumulasi besaran data (*bloatware*) pada server sekolah di tahun-tahun mendatang. EduConnect memperkenalkan sebuah paradigma pengelolaan basis data bernama **Sistem Arsip Kelas**.\n\n![Menu Arsip Kelas](../assets/images/class-archive.png)\n*(Gambar: Panel menu eksekusi pembersihan kelas dan pengarsipan)*\n\n## Menjaga Performa Sistem Tetap Prima\n\nMenjelang tahun ajaran baru atau momen kelulusan, sekolah biasa dihadapkan dengan perombakan data skala besar:\n- Siswa naik kelas\n- Siswa alumni yang dilepas dari sistem\n- Riwayat absen tahun ajaran lama yang menjadi basi\n\nDengan menggunakan modul **Arsip Kelas**, admin sekolah bisa mengeksekusi \"pembersihan\".\n\n## Bagaimana Modul ini Beroperasi?\n\n1. **Ekskavasi Data:** Admin menekan tombol pengarsipan pada kelas spesifik (Misalnya XII IPA 1).\n2. **Kompilasi Digital:** Sistem bekerja di latar belakang mengompilasi rekapitulasi lengkap semua murid di kelas tersebut dari absensi Hadir, Izin, Sakit, maupun Alpha di sepanjang tahun.\n3. **Ekspor Hard-Copy Digital:** Keseluruhan data tersebut di-_dump_ (diekskresi) menjadi satu bundel file bereksistensi **Excel (.xlsx)**. File super ringan ini lalu disimpan rapi dalam direktori penyimpanan statis internal server.\n4. **Pembersihan Bersih (Wiping):** Database operasional siswa yang berat akan dicuci hingga kembali menjadi 0 (nol). Server Anda tetap sekencang hari pertama kali membeli lisensi, meskipun sekolah telah meluluskan ratusan generasi.\n\n## Mudah Diunduh Kapanpun\nAnda membutuhkan catatan alumni dari 5 tahun yang lalu? File rekapan Excel akan selalu eksis dan berbaris rapi secara kronologis pada tabel riwayat arsip di panel Admin untuk dapat diunduh (Download) kapan saja tanpa khawatir akan hilang.\n\n---\n[\u2b05\ufe0f Kembali ke Halaman Utama](../index.html)\n", "auto-alpha-holidays.md": "---\nlayout: default\n---\n\n# \ud83e\udd16 Sistem Auto-Alpha & Manajemen Hari Libur\n\nMenangani catatan administratif ribuan siswa setiap harinya adalah mimpi buruk bagi operator tata usaha (TU). Di sinilah EduConnect memisahkan diri sebagai solusi cerdas.\n\n![Auto Alpha Configuration](../assets/images/auto-alpha-cron.png)\n*(Gambar: Menu Manajemen Hari Libur dan pengaturan otomatisasi di EduConnect)*\n\n## Pekerja Tak Kenal Lelah di Latar Belakang (Cron Job)\n\nBayangkan Anda memiliki asisten virtual yang bekerja otomatis di penghujung hari sekolah. EduConnect dirancang menggunakan arsitektur penjadwalan *Cron Job* dari Laravel.\n\nSetiap hari secara berulang pada waktu yang Anda tetapkan, sistem akan \"menyapu bersih\" dan memindai *database* absensi keseluruhan.\nSistem kemudian secara otomatis mencari: **Siapa saja siswa yang pada hari tersebut belum memiliki riwayat rekaman absen, belum mengajukan Surat Izin, atau belum tercatat Sakit?**\n\nSiswa yang memenuhi semua syarat \"hilang\" tersebut akan di-_stamp_ dengan status **Alpha (Tanpa Keterangan)** secara mandiri oleh aplikasi, tanpa membutuhkan klik atau persetujuan operator admin sedikitpun. Ini memastikan tingkat akurasi presensi yang tidak bisa dicurangi.\n\n## Cerdas Mengenali Hari Libur & Tanggal Merah\n\nSistem Auto-Alpha yang buta tanggal libur justru dapat menimbulkan kegaduhan (misalnya ketika murid diliburkan tetapi malah diberikan Alpha massal). Fitur **Manajemen Hari Libur** menuntaskan masalah tersebut:\n\n- **Mengenali Akhir Pekan:** Sistem secara standar bawaannya sudah menonaktifkan hukuman Alpha untuk hari Sabtu dan Minggu (Akhir pekan).\n- **Customisasi Tanggal Merah:** Apabila ada perayaan Hari Kemerdekaan, Cuti Lebaran, maupun Hari Libur Semester, Admin TU dapat mendata blok tanggal tersebut pada modul \"Hari Libur\".\n- **Otomatisasi Lanjutan:** Auto-Alpha sistem cukup cerdas mendeteksi tabel libur ini. Jika hari ini dinyatakan sebagai Libur Nasional, Cron Job secara terprogram akan mematikan mesinnya selama rentang waktu yang diatur. Siswa Anda akan terbebas dari ancaman poin pelanggaran Alpha.\n\n---\n[\u2b05\ufe0f Kembali ke Halaman Utama](../index.html)\n", "portal-orang-tua.md": "---\nlayout: default\n---\n\n# \ud83d\udcf1 Portal PWA Khusus Orang Tua\n\nDi era digital, pihak sekolah membutuhkan cara agar komunikasi dengan orang tua murid menjadi jauh lebih proaktif dan transparan. EduConnect memfasilitasi hal ini lewat fitur **Portal Publik**.\n\n![Parent Portal PWA](../assets/images/parent-portal.png)\n*(Gambar: Demonstrasi antar muka aplikasi portal absen saat diakses melalui smartphone orang tua, menunjukkan status kehadiran anaknya)*\n\n## Apa Itu Portal PWA?\n\nPWA atau *Progressive Web App* adalah terobosan inovasi web terkini yang memungkinkan sebuah website \"berperilaku\" dan \"terlihat\" layaknya sebuah aplikasi buatan *Play Store / App Store* saat dibuka melalui _browser_ di HP orang tua.\n\n- **Tanpa Perlu Repot Download:** Orang tua cukup mengetik URL/tautan sekolah di *browser* (misal: Google Chrome).\n- **Tombol Tambahkan ke Layar Utama (*Add to Homescreen*):** Setelah situs terbuka, portal akan otomatis menawarkan diri untuk dipasang di layar utama. Cukup sekali klik, dan aplikasi EduConnect mini kini terpasang rapi di perangkat *mobile* milik orang tua.\n- **Login yang Mudah dan Aman:** Kami menghilangkan kerumitan harus menghafal banyak sandi. Orang tua dapat mengakses dasbor pribadi anak mereka semata-mata dengan melakukan otentikasi Nomor Induk Siswa (NIS) dan mencocokkan Tanggal Lahir yang terdaftar di sekolah.\n\n## Manfaat Portal Orang Tua\n\n1. **Pemantauan Absensi Mandiri:** Orang tua bisa mengecek detail secara presisi pada jam dan menit berapa putra-putrinya melakukan cap jempol *scanner* di gerbang sekolah.\n2. **Riwayat Disiplin yang Transparan:** Menghindari siswa memanipulasi informasi kepada orang tua jika mereka telat sekolah, bolos (Alpha), atau pulang sebelum waktunya.\n\n---\n[\u2b05\ufe0f Kembali ke Halaman Utama](../index.html)\n", "rekap-laporan.md": "---\nlayout: default\n---\n\n# \ud83d\udcca Rekapitulasi & Laporan Akademik\n\nData mentah absensi tidak akan ada gunanya jika tidak dapat dikemas menjadi statistik yang memberikan wawasan (insight) kepada manajemen sekolah. EduConnect dilengkapi sebuah generator laporan mutakhir.\n\n![Report Generator Menu](../assets/images/report-dashboard.png)\n*(Gambar: Ilustrasi panel analitik dan dasbor utama pembuatan laporan absensi bulanan atau mingguan)*\n\n## Analitik di Ujung Jari Anda\n\nAdmin maupun Kepala Sekolah dapat menarik laporan kedisiplinan dan absensi berdasarkan rentang parameter apapun:\n- Pencarian laporan harian.\n- Laporan kedisiplinan mingguan.\n- Evaluasi bulanan dan semester.\n- Pemfilteran detail tingkat kelas atau individu murid.\n\n## Kompatibilitas Dokumen Standar Industri\n\nSekolah dan Kementerian Pendidikan seringkali mengharuskan penyerahan laporan administrasi dalam format fisik. Anda dapat mencetak rekapitulasi data dengan sekali klik ke dalam dua rupa tipe format berkas:\n\n1. **PDF (Portable Document Format)**  \n   Cocok untuk diserahkan ke Dinas Pendidikan, presentasi formal komite, maupun lampiran yang membutuhkan format tetap tanpa bisa dimodifikasi. Tersedia dalam cetak kop surat khusus identitas instansi.\n   \n2. **Microsoft Excel (.xlsx)**  \n   Cocok untuk tim guru Bimbingan Konseling (BK) jika membutuhkan kebebasan meracik formula tambahan, kalkulasi rata-rata indisipliner, maupun melakukan *filtering* khusus pada data. \n\nDengan modul Laporan Akademik EduConnect, Anda secara efektif menutup celah kebocoran birokrasi dan melipatgandakan kecepatan administrasi hingga puluhan kali lipat.\n\n---\n[\u2b05\ufe0f Kembali ke Halaman Utama](../index.html)\n"};
+        const docMenu = document.getElementById('docMenu');
+        const docContent = document.getElementById('docContent');
+        
+        const menuItems = [
+            { file: 'absensi-qr.md', label: '📷 Absensi QR Code' },
+            { file: 'portal-orang-tua.md', label: '📱 Portal Orang Tua' },
+            { file: 'auto-alpha-holidays.md', label: '🤖 Auto-Alpha & Libur' },
+            { file: 'rekap-laporan.md', label: '📊 Rekap & Laporan' },
+            { file: 'arsip-kelas.md', label: '📦 Arsip Kelas & Data' }
+        ];
+        
+        function renderDoc(fileId) {
+            // Update active menu
+            document.querySelectorAll('.doc-menu button').forEach(btn => {
+                if(btn.dataset.file === fileId) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            
+            let rawMd = docData[fileId] || 'Konten tidak ditemukan.';
+            
+            // Clean frontmatter if present
+            rawMd = rawMd.replace(/---[\s\S]*?---/, '').trim();
+            
+            // Check if there are mermaid blocks
+            let hasMermaid = false;
+            let html = '';
+            
+            if (rawMd.includes('```mermaid')) {
+                let titleMatch = rawMd.match(/^# (.*)/m);
+                let title = titleMatch ? `<h2>${titleMatch[1]}</h2><p>Tampilan flowchart alur kerja.</p>` : '';
+                html += title;
+                
+                rawMd.replace(/```mermaid([\s\S]*?)```/g, function(match, code) {
+                    hasMermaid = true;
+                    let decoded = code.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+                    html += `<div class="mermaid">${decoded}</div>`;
+                });
+            } else {
+                // Render standard markdown HTML using marked
+                html = marked.parse(rawMd);
+            }
+            
+            // Add download button for markdown file
+            let blob = new Blob([rawMd], { type: 'text/markdown' });
+            let url = URL.createObjectURL(blob);
+            html += `<div style="text-align: center; width: 100%; margin-top: 2rem;">
+                        <a href="${url}" download="${fileId}" class="btn-download">
+                            📥 Download Dokumen Panduan Lengkap (.md)
+                        </a>
+                     </div>`;
+            
+            docContent.innerHTML = html;
+            
+            // Re-run mermaid on new content if needed
+            if (hasMermaid) {
+                setTimeout(async () => {
+                    try {
+                        await mermaid.run({ querySelector: '.mermaid' });
+                    } catch (e) {
+                        console.error("Mermaid error:", e);
+                    }
+                }, 100);
+            }
+        }
+        
+        // Build menu
+        menuItems.forEach(item => {
+            if(!docData[item.file]) return;
+            const li = document.createElement('li');
+            const btn = document.createElement('button');
+            btn.dataset.file = item.file;
+            btn.innerText = item.label;
+            btn.onclick = (e) => { e.preventDefault(); renderDoc(item.file); };
+            li.appendChild(btn);
+            docMenu.appendChild(li);
+        });
+        
+        // Add doc navigation to navbar
+        const navLinks = document.querySelector('.nav-links');
+        if(navLinks && !navLinks.innerHTML.includes('#panduan-sistem')) {
+            const anchor = document.createElement('a');
+            anchor.href = '#panduan-sistem';
+            anchor.innerText = 'Panduan & Alur';
+            navLinks.insertBefore(anchor, navLinks.lastElementChild);
+        }
+        
+        // Initial load
+        if(menuItems.length > 0) {
+            renderDoc(menuItems[0].file);
+        }
+    </script>
+
 </body>
 </html>
